@@ -5,9 +5,12 @@ typedef struct mobs_s
 {
 	int attaque;
 	int life;
-	int gold;
 	int v_deplacement;
 	char caract;
+	
+	//position des mobs
+	int pos_x;
+	int pos_y;
 
 	//trouver comment insérer la structure attaque;
 	//void (*perte_vie)(struct mobs_t *);
@@ -17,7 +20,7 @@ typedef struct mobs_s
 
 
 /* Creation d'un objet mobs_t */
-mobs_t * creer_mobs();
+mobs_t * creer_mobs(int, int);
 
 /* Affiche la vie et les gold portes par le mob */
 void afficher_mobs(mobs_t * );

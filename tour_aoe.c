@@ -10,14 +10,16 @@ void tour_aoe_attaquer(tour_aoe_t * aoe, mobs_t * mat[][N])
 		for(int j = -RAYON_TOUR; j <= RAYON_TOUR; j++)
 			if( 0 <= (x+i) < N && 0 <= (y+j) < N && mat[x+i][y+j] != NULL )
 			{
+				afficher_tour_aoe(aoe);
+				printf(" attaque en <%d,%d> -%d PV\n", x+i, y+j, aoe->degat );
+					
 				perte_vie( &mat[x+i][y+j], aoe->degat );
-				printf("AOE <%d,%d> attaque en <%d,%d> -%d PV\n",
-					x, y,
-					x+i, y+j,
-					aoe->degat );
 				
 				if( mat[x+i][y+j] == NULL )
-					printf("AOE <%d,%d> a tuée <%d,%d>\n", x, y, x+i, y+j );
+				{
+					afficher_tour_aoe(aoe);
+					printf(" a tuée <%d,%d>\n", x+i, y+j );
+				}
 			}
 }
 
@@ -55,7 +57,7 @@ void afficher_tour_aoe( tour_aoe_t * aoe )
 {
 	if( tour_existe(aoe) )
 	{
-		printf("{AOE ");
+		printf("{AOE  <%d,%d> ", aoe->pos_x, aoe->pos_y);
 		afficher_tour( (tour_t*)aoe );
 		printf(" }");
 	}
@@ -68,10 +70,9 @@ void evoluer_tour_aoe( tour_aoe_t * aoe )
 	if( tour_existe(aoe) )
 	{
 		evoluer_tour( (void*)aoe );
-		printf("AOE <%d,%d> évolue au niveau %d, %d degats\n",
-			aoe->pos_x, aoe->pos_y,
-			aoe->niveau,
-			aoe->degat );
+		
+		afficher_tour_aoe(aoe);
+		printf(" a évolué au niveau %d, %d degats\n", aoe->niveau, aoe->degat );
 		printf("gold -%d : %d\n", MULT_PRIX_TOUR*(aoe->niveau-1), gold);
 	}
 }

@@ -43,20 +43,17 @@ void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 	{
 		int x_c = mono->x_cible, y_c = mono->y_cible;
 
-		perte_vie( &mat[x_c][y_c], mono->degat );
+		afficher_tour_mono(mono);
+		printf(" attaque en <%d,%d> -%d PV\n", x_c, y_c, mono->degat );
 
-		printf("Mono <%d,%d> attaque en <%d,%d> -%d PV\n",
-			mono->pos_x, mono->pos_y,
-			x_c, y_c,
-			mono->degat );
+		perte_vie( &mat[x_c][y_c], mono->degat );
 
 		//verifier si ennemi mort, alors cible = NULL
 		if( mat[x_c][y_c] == NULL )
 		{
 			mono->cible = NULL;
-			printf("Mono <%d,%d> a tuée <%d,%d>\n",
-				mono->pos_x, mono->pos_y,
-				x_c, y_c );
+			afficher_tour_mono(mono);
+			printf(" a tuée <%d,%d>\n", x_c, y_c );
 		}
 	}
 }
@@ -96,7 +93,7 @@ void afficher_tour_mono( tour_mono_t * mono )
 {
 	if( tour_existe(mono) )
 	{
-		printf("{MONO ");
+		printf("{MONO <%d,%d> ", mono->pos_x, mono->pos_y);
 		afficher_tour( (tour_t *)mono );
 		printf(" }");
 	}
@@ -109,10 +106,8 @@ void evoluer_tour_mono( tour_mono_t * mono )
 	if( tour_existe(mono) )
 	{
 		evoluer_tour( (void*)mono );
-		printf("Mono <%d,%d> évolue au niveau %d, %d degats\n",
-			mono->pos_x, mono->pos_y,
-			mono->niveau,
-			mono->degat );
+		afficher_tour_mono(mono);
+		printf(" a évolué au niveau %d, %d degats\n", mono->niveau, mono->degat );
 		printf("gold -%d : %d\n", MULT_PRIX_TOUR*(mono->niveau-1), gold);
 	}
 }

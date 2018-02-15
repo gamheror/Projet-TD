@@ -16,6 +16,8 @@
 #define V_DEP_MOB		10
 #define DEGAT_MOB		15
 #define NB_MOB		5
+#define DROP_MOB_MIN	20
+#define DROP_MOB_MAX	150
 
 /* Tours */
 #define NIVEAU_MAX_TOUR		5

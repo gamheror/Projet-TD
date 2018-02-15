@@ -1,0 +1,73 @@
+02/02	Pierre : Creation de l'objet "tour_t".
+				 Fonction de creation d'une tour, existance, affichage et destrution.
+				 Extension de l'objet "tour_t" à "tour_mono_t" et "tour_aoe_t".
+
+		Thomas : Creation de l'objet "mobs_t".
+
+06/02	Pierre : Creation de la fonction "evoluer_tour".
+		
+		Thomas : Fonctions de creation d'un mob, affichage et destruction.
+		
+		Antoine : Debut fonctions de selection de menu en console
+		
+		Quentin : Analyse des structures de données pour l'évolution des mobs sur le plateau
+		
+À faire:
+Ok		Fonction de perte de vie des mobs
+		Finir la fonction de gestion de la prise en main
+
+
+
+08/02	Mise en commun des objets "mobs" et "tours".
+
+		Pierre : Creation du header "all" regroupant les #include et #define communs aux objets.
+				 Debut de la fonction de "recherche_ennemi" pour les "tour mono"
+				 
+		Thomas : Fonction de perte de vie des mobs
+		
+À faire:
+OK		incrementation du compteur de gold quand un mob meurt
+OK		Fonction "mobs_existe" : renvoie 1 si mob existe, 0 sinon
+
+
+
+09/02	Pierre : Ajout de traces de l'execution du programme de test des tours et des mobs, par exemple "mono <x,y> a tué <x,y> -z PV".
+				 Ajout du pointeur sur fonction "attaquer_ennemi" aux tours.
+				 Ajout des methodes privees "tour_mono_attaquer" et "rechercher_ennemi" a l'objet "tour_mono".
+				 Les degats des tour_mono et tour_aoe sont maintenant differents (definis en constantes).
+À faire:
+Ok		ajout des fonctions de recherche et d'attaque d'ennemis pour les tours.
+
+
+
+10/02	Pierre : Ajout des fonctions "evoluer" pour tours mono et aoe.
+				 Ajout du ptr sur fnct "evoluer" aux obj "tours".
+				 Fonction "attaquer" pour les tour aoe
+				 
+		Thomas : Debut d'une fonction pour gérer les vagues d'ennemis
+				 Debut de l'ajout d'un compteur de mobs
+				 
+		Quentin : Dedut d'une solution pour deplacer les mobs sur le plateau suivant un chemin
+		
+À faire :
+Ok		Fonctions pour detruire les tours du plateau en fin de vague (de meme pour mobs)
+
+
+
+15/02	Pierre : Creation de la fonction pour detruire les tours du plateau
+				 Ajout de constantes pour le drop min et max des mobs
+				 
+		Thomas : Fonction "mobs_existe"
+				 Compteur de mobs fonctionnel
+				 Ajout des coordonnées des mobs
+				 Ajout d'un mesage console du nombre de gold généré par un mob a sa destruction
+		
+		Antoine : Debut de la SDL
+		
+		Quentin : Fin du déplacement des mobs 
+		
+À faire:
+		Faire bouger les mobs sur le plateau, plusieurs mobs peuvent etre sur la meme case
+		Ajout d'attributs aux obj mobs definissant leurs positions sur le plateau
+		Créer le monument.
+		Passer gold en GOLD
