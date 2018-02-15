@@ -1,8 +1,0 @@
-Etat d'avancement de la mise en commun des objets "mobs" et "tours", description de ce qui a été fait et si qu'il y a a faire.
-
-08/01	Mise en commun des objets "mobs" et "tours".
-		Creation du header "all" regroupant les #include et #define communs aux objets.
-
-09/01	Ajout de traces de l'execution du programme de test des tours et des mobs, par exemple "mono <x,y> a tué <x,y> -z PV".
-
-	À faire : Fonctions pour detruire les tours du plateau en fin de vague (de meme pour mobs)
