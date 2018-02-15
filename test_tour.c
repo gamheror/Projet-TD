@@ -8,6 +8,9 @@ int main()
 	tour_aoe_t * aoe = NULL;
 	tour_mono_t * mono = NULL;
 	
+	printf("Tour aoe existe ? %d\n", existe_tour(aoe) );
+	printf("Tour mono existe ? %d\n", existe_tour(mono) );
+	
 	aoe = creer_tour_aoe();
 	mono = creer_tour_mono();
 	

@@ -1,0 +1,17 @@
+Etat d'avancement de l'objet "mobs", description de ce qui a été fait et si qu'il y a a faire.
+
+30/01	Creation de l'objet "mobs_t".
+		Fonctions de creation d'un mob,
+		fonction d'affichage et
+		fonction de destruction.
+
+Ok	À faire: fonction de perte de vie.
+
+08/02	Fonction de perte de vie.
+		Mise en commun avec les objets "tours"
+	
+	À faire: incrementation du compteur de gold quand un mob meurt
+			 Fonction "mobs_existe" : renvoie 1 si mob existe, 0 sinon
+
+===> Message : La methode "detruire" (pointeur sur fnct dans l'objet "mobs_t") n'a d'utilité car la destruction d'un mob se fait via la fonction "perte_de_vie".
+===> Compteur de mobs : incrementé a la creation d'un mob (inversement a la destruction), quand le compteur est a 0, la vague est terminée.

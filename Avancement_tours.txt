@@ -1,0 +1,23 @@
+Etat d'avancement des objets "tours", description de ce qui a été fait et à venir.
+
+26/01	Creation de l'objet "tour_t".
+		Fonction de creation d'une tour,
+		fonction d'existance,
+		fonction d'affichage et
+		fonction de destrution.
+		Extension de l'objet "tour_t" à "tour_mono_t" et "tour_aoe_t".
+
+30/01	Creation de la fonction "evoluer_tour".
+
+Ok	À faire: ajout des fonctions de recherche et d'attaque d'ennemis.
+
+08/01	Mise en commun avec l'objet "mobs".
+		Debut  de la fonction de "recherche_ennemi".
+
+09/01	Ajout du pointeur sur fonction "attaquer_ennemi" aux tours.
+		Ajout des methodes privees "tour_mono_attaquer" et "rechercher_ennemi" a l'objet "tour_mono".
+		Les degats des tour_mono et tour_aoe sont maintenant differents (definis en constantes).
+
+10/01	Ajout des fonctions "evoluer" pour tours mono et aoe.
+		Ajout du ptr sur fnct "evoluer" aux obj "tours".
+		Fonction "attaquer" pour les tour aoe

@@ -1,44 +1,64 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include "mobs.h"
+#include "../all.h"
 
-#define LIFE 200
-#define V_DEP 10
 
-mobs_t * mobs_creer()
-{
-	mobs_t * mobs = malloc(sizeof(mobs_t));
-	
-	mobs->life = LIFE;
-	mobs->v_deplacement = V_DEP;
-	mobs->gold = rand()%1000;
-	
-	return mobs;
-}
+static int compteur_mobs = 0;
 
 void afficher_mobs(mobs_t * mobs)
 {
-	printf("{mob {%d, %d}}", mobs->life, mobs->gold);
-	
+	if(mobs != NULL)
+		printf("{mob {%d, %d}}\n", mobs->life, mobs->gold);
+
+	else
+	{
+		printf("{mob NULL}\n");
+	}
 }
 
 void detruire_mobs(mobs_t ** mobs)
 {
 	free(*mobs);
 	*mobs = NULL;
+
+	compteur_mobs --;
+
 }
 
-/*
-void perte_vie (mobs_t * mobs, tower_t * tower, void(*focus)(int *)
+
+void perte_vie (mobs_t ** mobs, int nb_degat)
 {
-	boucle avec la range de la tour
-		utilisation de la fonction focus
-		boucle vie du mob > 0
-			-> dégâts continue
-			-> mise à jour de la vie à chaque coups 
-			-> utilisation de la structure attaque(tower)
-		fin  
-}
-*/
+	(*mobs)->life -= nb_degat;
 
+	if ((*mobs)->life <= 0)
+		(*mobs)->detruire(mobs);
+ 
+}
+
+
+mobs_t * creer_mobs()
+{
+	mobs_t * mobs = malloc(sizeof(mobs_t));
+
+	mobs->life = VIE_MOB;
+	mobs->v_deplacement = V_DEP_MOB;
+	mobs->gold = rand()%100;
+	mobs->attaque = DEGAT_MOB;
+
+	mobs->detruire = detruire_mobs;
+	
+	compteur_mobs ++;
+
+	return mobs;
+}
+
+/*void vague(int multiple)
+{
+	mobs_t * mobs;
+
+	while(compteur_mobs<NB_MOB)
+	{
+		creer_mobs;
+		afficher_mobs(mobs);
+		printf("\n%d \n",compteur_mobs);
+
+	}
+}*/
