@@ -1,4 +1,4 @@
-OBJ = test_mobs_tower.o tour.o tour_mono.o tour_aoe.o mobs.o
+OBJ = test_mobs_tower.o tour.o tour_mono.o tour_aoe.o mobs.o monument.o
 
 test_mobs_tower : $(OBJ)
 	gcc $(OBJ) -o test_mobs_tower
@@ -18,3 +18,6 @@ tour_aoe.o : Towers/tour_aoe.c
 
 tour_mono.o: Towers/tour_mono.c
 	gcc -c Towers/tour_mono.c
+
+monument.o: Towers/monument.c
+	gcc -c Towers/monument.c

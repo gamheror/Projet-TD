@@ -1,9 +1,21 @@
+----Séance----
+30/01	Définition des structures de données
+
+
+
+
+
 02/02	Pierre : Creation de l'objet "tour_t".
 				 Fonction de creation d'une tour, existance, affichage et destrution.
 				 Extension de l'objet "tour_t" à "tour_mono_t" et "tour_aoe_t".
 
 		Thomas : Creation de l'objet "mobs_t".
 
+
+
+
+
+----Séance----
 06/02	Pierre : Creation de la fonction "evoluer_tour".
 		
 		Thomas : Fonctions de creation d'un mob, affichage et destruction.
@@ -15,6 +27,8 @@
 À faire:
 Ok		Fonction de perte de vie des mobs
 		Finir la fonction de gestion de la prise en main
+
+
 
 
 
@@ -31,12 +45,16 @@ OK		Fonction "mobs_existe" : renvoie 1 si mob existe, 0 sinon
 
 
 
+
+
 09/02	Pierre : Ajout de traces de l'execution du programme de test des tours et des mobs, par exemple "mono <x,y> a tué <x,y> -z PV".
 				 Ajout du pointeur sur fonction "attaquer_ennemi" aux tours.
 				 Ajout des methodes privees "tour_mono_attaquer" et "rechercher_ennemi" a l'objet "tour_mono".
 				 Les degats des tour_mono et tour_aoe sont maintenant differents (definis en constantes).
 À faire:
 Ok		ajout des fonctions de recherche et d'attaque d'ennemis pour les tours.
+
+
 
 
 
@@ -54,6 +72,9 @@ Ok		Fonctions pour detruire les tours du plateau en fin de vague (de meme pour m
 
 
 
+
+
+----Séance----
 15/02	Pierre : Creation de la fonction pour detruire les tours du plateau
 				 Ajout de constantes pour le drop min et max des mobs
 				 
@@ -68,6 +89,20 @@ Ok		Fonctions pour detruire les tours du plateau en fin de vague (de meme pour m
 		
 À faire:
 		Faire bouger les mobs sur le plateau, plusieurs mobs peuvent etre sur la meme case
-		Ajout d'attributs aux obj mobs definissant leurs positions sur le plateau
-		Créer le monument.
-		Passer gold en GOLD
+OK		Ajout d'attributs aux obj mobs definissant leurs positions sur le plateau
+Ok		Créer le monument.
+		==> Fichier(s) de sauvegarde
+
+
+
+
+
+----Séance----
+20/02	Pierre : Creation de l'objet monument.
+
+		Thomas : Début de la liste modelisant le chemin
+
+		Antoine : SDL
+
+À faire:
+		

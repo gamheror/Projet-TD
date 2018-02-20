@@ -27,9 +27,10 @@
 #define RAYON_TOUR			5
 #define COOLDOWN_TOUR		500
 #define MULT_PRIX_TOUR		100
+#define DEGATS_MONU			20
 
 #define PRIX_TOUR	500
 
-int gold;
+int GOLD;
 
 #endif
