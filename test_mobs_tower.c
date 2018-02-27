@@ -52,8 +52,8 @@ int main()
 	tower[1][1] = (void*) creer_tour_mono(1, 1);
 	tower[2][1] = (void*) creer_tour_aoe(2, 1);
 	tower[4][4] = (void*) creer_monument(4, 4);
-	mob[3][3] = creer_mobs(3,3);
-	mob[3][4] = creer_mobs(3,4);
+//	mob[3][3] = creer_mobs(3,3);
+//	mob[3][4] = creer_mobs(3,4);
 		
 	printf("\nMAP :\n");
 	afficher_tower(tower, mob);

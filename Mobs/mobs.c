@@ -1,6 +1,5 @@
 #include "mobs.h"
 
-
 static int compteur_mobs = 0;
 
 int mobs_existe(mobs_t * const mobs)
@@ -54,7 +53,7 @@ void perte_vie (mobs_t ** mobs, int nb_degat)
 
 mobs_t * creer_mobs(elem_t * elem)
 {
-	liste_t * liste = elem->premier;
+//	liste_t * liste = elem->premier;
 
 	mobs_t * mobs = malloc(sizeof(mobs_t));
 
@@ -62,9 +61,9 @@ mobs_t * creer_mobs(elem_t * elem)
 	mobs->v_deplacement = V_DEP_MOB;
 	mobs->attaque = DEGAT_MOB;
 	
-	mobs->pos_x = liste->x;
+/*	mobs->pos_x = liste->x;
 	mobs->pos_y = liste->y;
-
+*/
 	mobs->detruire = detruire_mobs;
 	
 	compteur_mobs ++;

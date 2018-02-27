@@ -91,7 +91,7 @@ Ok		Fonctions pour detruire les tours du plateau en fin de vague (de meme pour m
 		Faire bouger les mobs sur le plateau, plusieurs mobs peuvent etre sur la meme case
 OK		Ajout d'attributs aux obj mobs definissant leurs positions sur le plateau
 Ok		Créer le monument.
-		==> Fichier(s) de sauvegarde
+Ok		==> Fichier(s) de sauvegarde
 
 
 
@@ -129,3 +129,21 @@ A faire :
 
 Problème :
 		Insertion dans la liste : bug lors de la lecture du fichier, le derniere élément est {0 0} alos que celui-ci n'est pas présent dans le fichier
+
+
+
+
+
+----Séance----
+27/02	Antoine : SDL
+		
+		Quentin : Déplacement des mobs
+		
+		Pierre : Début fichier de sauvegarde des tours et création simplifié de la matrice
+	
+Problème :
+		Problème d'installation de modules SDL
+		Problème include fichier "mobs.h" et "tour_mono.h"
+		
+À faire :
+		Mise en commun du placement des tours et du déplacement des mobs
