@@ -1,4 +1,4 @@
-----Séance----
+﻿----Séance----
 30/01	Définition des structures de données
 
 
@@ -105,4 +105,27 @@ Ok		Créer le monument.
 		Antoine : SDL
 
 À faire:
-		
+        Thomas/Quentin : Déplacement des mobs
+        Antoine : SDL
+        Pierre : Mécaniques de jeu
+
+
+
+
+24/02	Thomas : Problème de ségementation sur la liste du chemin
+				 Chemin créé + jointure coordonée mobs avec la liste
+
+Problème :
+		Erreur de segmentation avec l'affichage du chemin
+
+A faire :
+		Trouver comment assembler le liste du chemin avec l'avancement des mobs
+
+
+
+
+
+25/02	Pierre : Ajout de nouvelles fonctions à la liste
+
+Problème :
+		Insertion dans la liste : bug lors de la lecture du fichier, le derniere élément est {0 0} alos que celui-ci n'est pas présent dans le fichier

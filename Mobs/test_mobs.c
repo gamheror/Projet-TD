@@ -15,5 +15,6 @@ int main()
 	perte_vie(&mobs,rand()%400);
 	afficher_mobs(mobs);
 	detruire_mobs(&mobs);
-
+	
+	
 }

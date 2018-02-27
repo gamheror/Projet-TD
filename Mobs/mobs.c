@@ -1,4 +1,4 @@
-#include "../all.h"
+#include "mobs.h"
 
 
 static int compteur_mobs = 0;
@@ -52,16 +52,18 @@ void perte_vie (mobs_t ** mobs, int nb_degat)
 }
 
 
-mobs_t * creer_mobs(int x, int y)
+mobs_t * creer_mobs(elem_t * elem)
 {
+	liste_t * liste = elem->premier;
+
 	mobs_t * mobs = malloc(sizeof(mobs_t));
 
 	mobs->life = VIE_MOB;
 	mobs->v_deplacement = V_DEP_MOB;
 	mobs->attaque = DEGAT_MOB;
 	
-	mobs->pos_x = x;
-	mobs->pos_y = y;
+	mobs->pos_x = liste->x;
+	mobs->pos_y = liste->y;
 
 	mobs->detruire = detruire_mobs;
 	
