@@ -2,31 +2,60 @@
 #define _TOUR_H_
 
 #include "../all.h"
-#include "../Mobs/mobs.h" //l'objet mobs_t n'est pas reconnu sans cette ligne, alors qu'il est include dans "all.h"...
+#include "../Mobs/mobs.h"
 
+/*-------- Structures --------*/
 typedef struct tour_s
 {
 	#include "attributs_tour.h"
 } tour_t;
 
-/* Creer une tour de niveau
-	les coordonnees de la tour dans la matrice sont passees en param */
-tour_t * creer_tour( int x, int y );
+typedef struct tour_aoe_s
+{
+	#include "attributs_tour.h"
+} tour_aoe_t;
 
-/* Revoie 0 n'existe pas
-	!= 0 si existe */
+typedef struct tour_mono_s
+{
+	#include "attributs_tour.h"
+	
+	mobs_t * cible;
+	int x_cible, y_cible;
+	
+} tour_mono_t;
+
+typedef struct monument_s
+{
+	#include "attributs_tour.h"
+} monument_t;
+
+
+/*-------- Creation --------*/
+tour_t * creer_tour(int, int);
+tour_aoe_t * creer_tour_aoe(int, int);
+tour_mono_t * creer_tour_mono(int, int);
+monument_t * creer_monument(int, int);
+
+
+/*-------- Fonction booléenne --------*/
 int tour_existe( void * );
 
-/* Afficher le niveau de la tour et ses degats 
-	{niveau degats}*/
-void afficher_tour( tour_t * );
 
-/* La tour gagne un niveau et des degats
-	Le niveau max est limité par une constante
-	La tour gagne un nombre fixe de degat */
-void evoluer_tour( tour_t * );
+/*-------- Attaque --------*/
+void tour_aoe_attaquer(tour_aoe_t *, mobs_t *(*)[20]);
+void tour_mono_attaquer( tour_mono_t *, mobs_t *(*)[20] );
 
-/* Libere l'espace memoire de la tour */
-void detruire_tour( tour_t ** );
+
+/*-------- Modifications --------*/
+int evolution_tour( tour_t * );
+int evoluer_tour_aoe( tour_aoe_t * );
+int evoluer_tour_mono( tour_mono_t * );
+
+
+/*-------- Destruction --------*/
+int detruire_tour( tour_t ** );
+int detruire_tour_aoe( tour_aoe_t ** );
+int detruire_tour_mono( tour_mono_t ** );
+int detruire_monument(monument_t **);
 
 #endif

@@ -1,7 +1,7 @@
-void (*detruire)( void ** );
-void (*attaquer)( void *, void *(*)[20] );
-void (*evoluer)(void *);
 void (*afficher)(void*);
+int (*evoluer)(void *);
+void (*attaquer)( void *, void *(*)[20] );
+int (*detruire)( void ** );
 
 int niveau;
 int degat;

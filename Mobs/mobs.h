@@ -19,7 +19,7 @@ typedef struct mobs_s
 	//void (*perte_vie)(struct mobs_t *);
 	void (*detruire)(struct mobs_s **);
 	
-}mobs_t;
+} mobs_t;
 
 
 /* Creation d'un objet mobs_t */

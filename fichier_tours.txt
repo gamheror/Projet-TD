@@ -1,0 +1,4 @@
+MONUMENT
+x=5 y=10
+niveau=1
+

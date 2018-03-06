@@ -1,13 +1,14 @@
 #include "../all.h"
 
+/*-------- Creation --------*/
 tour_t * creer_tour( int x, int y )
 {
 	tour_t * tour = NULL;
 	
-	tour = malloc(sizeof(tour_t));
+	tour = malloc(sizeof(*tour));
 
 	if( tour == NULL )
-		printf("Erreur de creation d'une tour\n");
+		printf("\tERREUR, espace mémoire insuffisant pour la création d'une tour !\n");
 	else
 	{
 		tour->niveau = 1;
@@ -20,42 +21,45 @@ tour_t * creer_tour( int x, int y )
 	return tour;
 }
 
+
+/*-------- Fonction booléenne --------*/
 int tour_existe( void * tour )
 {
 	return tour != NULL ;
 }
 
-void afficher_tour( tour_t * tour )
+
+/*-------- Modifications --------*/
+int evolution_tour( tour_t * tour )
+/* cout_évolution = niveau_tour * 100 */
 {
-	tour_existe(tour) ? printf("{%d %d}", tour->niveau, tour->degat) : printf("{NULL}");
+	if( !tour_existe(tour) )
+		return OBJ_NULL;
+	
+	int n = tour->niveau;
+	
+	if(GOLD < 100*n)
+		return MANQUE_GOLD;
+	if(n >= NIVEAU_MAX_TOUR)
+		return NIVEAU_MAX;
+	
+	GOLD -= 100*n;
+		
+	tour->niveau++;
+	tour->degat *= MULT_DEGATS_TOUR;
+	
+	return OK;
 }
 
-void evoluer_tour( tour_t * tour )
-/* 1 -> 2 100 gold
-	2 -> 3 200 gold
-	3 -> 4 300 gold
-	4 -> 5 400 gold */
-{
-	if( tour_existe(tour) )
-	{
-		int n = tour->niveau;
-		if( n < NIVEAU_MAX_TOUR && GOLD >= 100*n )
-		{
-			GOLD -= 100*n;
-			
-			tour->niveau++;
-			tour->degat *= MULT_DEGATS_TOUR;
-		}
-	}
-	else
-		printf("Evolution d'une tour inexistante !\n");
-}
 
-void detruire_tour( tour_t ** tour )
+/*-------- Destruction --------*/
+int detruire_tour( tour_t ** tour )
 {
-	if( tour_existe(*tour) )
-	{
-		free(*tour);
-		*tour = NULL;
-	}
+	if( !tour_existe(*tour) )
+		return OBJ_NULL;
+	
+	free(*tour);
+	*tour = NULL;
+	
+	return OK;
 }

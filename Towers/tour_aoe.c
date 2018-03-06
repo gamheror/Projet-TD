@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "../all.h"
 
-static
 void tour_aoe_attaquer(tour_aoe_t * aoe, mobs_t * mat[][N])
+/* Fonction d'attaque d'une tour d'AOE */
 {
 	int x = aoe->pos_x, y = aoe->pos_y;
 	
@@ -10,80 +10,100 @@ void tour_aoe_attaquer(tour_aoe_t * aoe, mobs_t * mat[][N])
 		for(int j = -RAYON_TOUR; j <= RAYON_TOUR; j++)
 			if( 0 <= (x+i) < N && 0 <= (y+j) < N && mat[x+i][y+j] != NULL )
 			{
-				aoe->afficher(aoe);
-				printf(" attaque en <%d,%d> -%d PV\n", x+i, y+j, aoe->degat );
+				printf("AOE %02d %02d attaque en <%02d,%02d> -%d PV\n", 
+					aoe->pos_x, aoe->pos_y, x+i, y+j, aoe->degat );
 					
 				perte_vie( &mat[x+i][y+j], aoe->degat );
 				
 				if( mat[x+i][y+j] == NULL )
-				{
-					aoe->afficher(aoe);
-					printf(" a tuée <%d,%d>\n", x+i, y+j );
-				}
+					printf("AOE %02d %02d a tuée <%02d,%02d>\n",
+						aoe->pos_x, aoe->pos_y, x+i, y+j );
 			}
 }
 
-static void afficher_tour_aoe( tour_aoe_t * aoe )
+static
+void afficher_tour_aoe( tour_aoe_t * aoe )
+/* Affichage d'une tour d'AOE */
 {
 	if( tour_existe(aoe) )
-	{
-		printf("{AOE  <%d,%d> ", aoe->pos_x, aoe->pos_y);
-		afficher_tour( (tour_t*)aoe );
-		printf(" }");
-	}
+		printf("A");
 	else
 		printf("{NULL}");
 }
 
+
+/*-------- Évolution --------*/
+int evoluer_tour_aoe( tour_aoe_t * aoe )
+{
+	if( !tour_existe(aoe) )
+		return OBJ_NULL;
+	
+	int rtn = evolution_tour( (void*)aoe );
+	
+	if(rtn == OK)
+		printf("AOE <%02d,%02d> évolue au niveau %d, %d dégats\n",
+			aoe->pos_x, aoe->pos_y, aoe->niveau, aoe->degat );
+	
+	return rtn;
+}
+
+
+/*-------- Creation --------*/
 tour_aoe_t * creer_tour_aoe( int x, int y )
 {
+	if( GOLD < PRIX_TOUR )
+	{
+		printf("\tGOLD insuffisant pour poser une tour AOE !\n");
+		return NULL;
+	}
+	
 	tour_t * temp = NULL;
 	tour_aoe_t * aoe = NULL;
 
-	if( GOLD >= PRIX_TOUR )
-	{
-		temp = creer_tour(x,y);
-		aoe = realloc(temp, sizeof(tour_aoe_t));
-		
-		if( aoe == NULL )
-			printf("Erreur creation d'une tour aoe\n");
-		else
-		{
-			aoe->degat = DEGATS_TOUR_AOE;
+	temp = creer_tour(x,y);
+	if(temp == NULL)
+		return NULL;
 	
-			aoe->detruire = (void (*)( void ** )) detruire_tour_aoe;
-			aoe->attaquer = (void (*)(void *, void *(*)[N])) tour_aoe_attaquer;
-			aoe->evoluer = (void (*)(void *)) evoluer_tour_aoe;
-			aoe->afficher = (void (*)(void *)) afficher_tour_aoe;
-			
-			GOLD -= PRIX_TOUR;
-			
-			aoe->afficher(aoe);
-			printf(" posée en <%d,%d>\n", x, y);
-			printf("GOLD -%d : %d\n", PRIX_TOUR, GOLD);
-		}
+	aoe = realloc(temp, sizeof(*aoe));
+	if( aoe == NULL )
+	{
+		printf("\tERREUR, espace mémoire insuffisant pour la création d'une tour d'AOE !\n");
+		return NULL;
 	}
+	
+	
+	aoe->degat = DEGATS_TOUR_AOE;
+
+	aoe->detruire = (int (*)( void ** )) detruire_tour_aoe;
+	aoe->attaquer = (void (*)(void *, void *(*)[N])) tour_aoe_attaquer;
+	aoe->evoluer = (int (*)(void *)) evoluer_tour_aoe;
+	aoe->afficher = (void (*)(void *)) afficher_tour_aoe;
+	
+	GOLD -= PRIX_TOUR;	
+	
+	//Fichier de sauvegarde
+	FILE * fic = fopen("fichier_tours.txt", "a");
+	if(!fic)
+	{
+		printf("\tERREUR, ouverture du fichier de sauvgarde impossible !\n");
+		return NULL;
+	}
+	fprintf(fic, "AOE\n");
+	fprintf(fic, "x=%d y=%d\n", x, y);
+	fprintf(fic, "niveau=1\n\n");
+	fclose(fic);	
 	
 	return aoe;
 }
 
-void evoluer_tour_aoe( tour_aoe_t * aoe )
+/*-------- Destruction --------*/
+int detruire_tour_aoe( tour_aoe_t ** aoe )
 {
-	if( tour_existe(aoe) )
-	{
-		evoluer_tour( (void*)aoe );
-		
-		aoe->afficher(aoe);
-		printf(" a évolué au niveau %d, %d degats\n", aoe->niveau, aoe->degat );
-		printf("GOLD -%d : %d\n", MULT_PRIX_TOUR*(aoe->niveau-1), GOLD);
-	}
-}
-
-void detruire_tour_aoe( tour_aoe_t ** aoe )
-{
-	if( tour_existe( (*aoe) ) )
-	{
-		free(*aoe);
-		*aoe = NULL;
-	}
+	if( !tour_existe( (*aoe) ) )
+		return OBJ_NULL;
+	
+	free(*aoe);
+	*aoe = NULL;
+	
+	return OK;
 }

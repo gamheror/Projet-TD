@@ -1,4 +1,4 @@
-#include "mobs.h"
+#include "../all.h"
 
 static int compteur_mobs = 0;
 

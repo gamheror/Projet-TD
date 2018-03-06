@@ -2,8 +2,6 @@
 #define _TOURS_H_
 
 #include "tour.h"
-#include "tour_aoe.h"
-#include "tour_mono.h"
-#include "monument.h"
+#include "map_tower.h"
 
 #endif

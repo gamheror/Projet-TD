@@ -27,7 +27,6 @@ int rechercher_ennemi( tour_mono_t * mono, mobs_t * mat[][N] )
 	return 0;
 }
 
-static
 void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 /* Fonction d'attaque d'une tour mono cible
 	Recherche un ennemi si elle n'a pas en cible */
@@ -58,66 +57,89 @@ void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 	}
 }
 
+static
 void afficher_tour_mono( tour_mono_t * mono )
 {
 	if( tour_existe(mono) )
-	{
-		printf("{MONO <%d,%d> ", mono->pos_x, mono->pos_y);
-		afficher_tour( (tour_t *)mono );
-		printf(" }");
-	}
+		printf("M");
 	else
-		printf("NULL");
+		printf("{NULL}");
 }
 
+
+/*-------- Évolution --------*/
+int evoluer_tour_mono( tour_mono_t * mono )
+{
+	if( !tour_existe(mono) )
+		return OBJ_NULL;
+	
+	int rtn = evolution_tour( (void*) mono );
+	
+	if(rtn == OK)
+		printf("MONO <%02d,%02d> évolue au niveau %d, %d dégats\n",
+			mono->pos_x, mono->pos_y, mono->niveau, mono->degat );
+		
+	return rtn;
+}
+
+
+/*-------- Creation --------*/
 tour_mono_t * creer_tour_mono( int x, int y )
 {
+	if(GOLD < PRIX_TOUR)
+	{
+		printf("\tGOLD insuffisant pour poser une tour AOE !\n");
+		return NULL;
+	}
+	
 	tour_t * temp = NULL;
 	tour_mono_t * mono = NULL;
 	
-	if( GOLD >= PRIX_TOUR )
-	{
-		temp = creer_tour(x,y); //Utilise la fonction de creation d'une tour simple
-		mono = realloc(temp, sizeof(tour_mono_t)); //Realloc pour adapter la taille memoire allouee de tour vers tour_aoe
-		//Verifie si realloc a trouve de la place pour une tour_mono
-		if( mono == NULL )
-			printf("Erreur creation d'une tour mono\n");
-		else
-		{
-			mono->degat = DEGATS_TOUR_MONO;
-			mono->cible = NULL;
+	temp = creer_tour(x,y); //Utilise la fonction de creation d'une tour simple
+	if(temp == NULL)
+		return NULL;
 	
-			mono->detruire = (void (*)( void ** )) detruire_tour_mono;
-			mono->attaquer = (void (*)(void *, void *(*)[N])) tour_mono_attaquer;
-			mono->evoluer = (void (*)(void *)) evoluer_tour_mono;
-			mono->afficher = (void (*)(void *)) afficher_tour_mono;
-			
-			GOLD -= PRIX_TOUR;
-			
-			printf("Mono posée en <%d,%d>\n", x, y);
-			printf("GOLD -%d : %d\n", PRIX_TOUR, GOLD);
-		}
+	mono = realloc(temp, sizeof(*mono)); //Realloc pour adapter la taille memoire allouee de tour vers tour_aoe
+	if( mono == NULL ) //Vérifie que la reallocation a trouvé de la place
+	{
+		printf("\tERREUR, espace mémoire insuffisant pour la création d'une tour MONO !\n");
+		return NULL;
 	}
+		
+	
+	mono->degat = DEGATS_TOUR_MONO;
+	mono->cible = NULL;
+
+	mono->detruire = (int (*)( void ** )) detruire_tour_mono;
+	mono->attaquer = (void (*)(void *, void *(*)[N])) tour_mono_attaquer;
+	mono->evoluer = (int (*)(void *)) evoluer_tour_mono;
+	mono->afficher = (void (*)(void *)) afficher_tour_mono;
+	
+	GOLD -= PRIX_TOUR;
+	
+	//Fichier de sauvegarde
+	FILE * fic = fopen("fichier_tours.txt", "a");
+	if(!fic)
+	{
+		printf("\tERREUR, ouverture du fichier de sauvgarde impossible !\n");
+		return NULL;
+	}
+	fprintf(fic, "MONO\n");
+	fprintf(fic, "x=%d y=%d\n", x, y);
+	fprintf(fic, "niveau=1\n\n");
+	fclose(fic);
 	
 	return mono;
 }
 
-void evoluer_tour_mono( tour_mono_t * mono )
+/*-------- Destruction --------*/
+int detruire_tour_mono( tour_mono_t ** mono )
 {
-	if( tour_existe(mono) )
-	{
-		evoluer_tour( (void*)mono );
-		mono->afficher(mono);
-		printf(" a évolué au niveau %d, %d degats\n", mono->niveau, mono->degat );
-		printf("GOLD -%d : %d\n", MULT_PRIX_TOUR*(mono->niveau-1), GOLD);
-	}
-}
-
-void detruire_tour_mono( tour_mono_t ** mono )
-{
-	if( tour_existe(*mono) )
-	{
-		free(*mono);
-		*mono = NULL;
-	}
+	if( !tour_existe(*mono) )
+		return OBJ_NULL;
+	
+	free(*mono);
+	*mono = NULL;
+	
+	return OK;
 }
