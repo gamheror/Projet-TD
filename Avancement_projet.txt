@@ -91,7 +91,7 @@ Ok		Fonctions pour detruire les tours du plateau en fin de vague (de meme pour m
 		Faire bouger les mobs sur le plateau, plusieurs mobs peuvent etre sur la meme case
 OK		Ajout d'attributs aux obj mobs definissant leurs positions sur le plateau
 Ok		Créer le monument.
-Ok		==> Fichier(s) de sauvegarde
+Ok		Fichier(s) de sauvegarde
 
 
 
@@ -105,9 +105,9 @@ Ok		==> Fichier(s) de sauvegarde
 		Antoine : SDL
 
 À faire:
-        Thomas/Quentin : Déplacement des mobs
-        Antoine : SDL
-        Pierre : Mécaniques de jeu
+        Déplacement des mobs
+        SDL
+        Mécaniques de jeu
 
 
 
@@ -134,16 +134,23 @@ Problème :
 
 
 
-----Séance----
-27/02	Antoine : SDL
-		
-		Quentin : Déplacement des mobs
-		
-		Pierre : Début fichier de sauvegarde des tours et création simplifié de la matrice
-	
-Problème :
-		Problème d'installation de modules SDL
-		Problème include fichier "mobs.h" et "tour_mono.h"
-		
+02/03	Pierre : Matrice de tours (affichage et destruction des tours)
+				 Modifications des tours
+
+
+
+
+
+05/03	Pierre : Ergonomie de l'utilisation des tours
+				 Le monument est posé a la creation de la map aléatoirement
+				 Les 2 types de tours peuvent être posées sur la map
+				 Les tours de la map peuvent évoluer, attaquer et être detruite
+
+
+
+
+
+06/03	Pierre : Fichier de sauvegarde des tours + Chargement
+
 À faire :
-		Mise en commun du placement des tours et du déplacement des mobs
+		Modifier le fichhier de sauvegarde quand une tour evolue

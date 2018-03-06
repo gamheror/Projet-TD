@@ -1,5 +1,7 @@
 #include "../all.h"
 
+static int nb_monument = 0;
+
 static
 void afficher_monument(monument_t * monu)
 /* Affichage du monument */
@@ -12,29 +14,33 @@ void afficher_monument(monument_t * monu)
 
 
 /*-------- Creation --------*/
-monument_t * creer_monument(int x, int y)
+monument_t * new_monument(int x, int y)
 {
-	tour_t * temp = NULL;
-	monument_t * monu = NULL;
-
-	temp = creer_tour(x,y);
-	if(temp == NULL)
-		return NULL;
-	
-	monu = realloc(temp, sizeof(*monu));
-	if( monu == NULL )
+	if(nb_monument >= 1)
 	{
-		printf("\tERREUR, espace mémoire insuffisant pour la création du monument !\n");
+		printf("\tERREUR, un monument est deja construit, impossible d'en créer un nouveau !\n");
 		return NULL;
 	}
 	
+	monument_t * monu = (monument_t *) new_aoe(x, y);
+	if( monu == NULL )
+		return NULL;
 	
 	monu->degat = DEGATS_MONU;
 
 	monu->detruire = (int (*)(void **)) detruire_monument;
-	monu->attaquer = (void (*)(void *, void *(*)[N])) tour_aoe_attaquer;
-	monu->evoluer = (int (*)(void *)) evoluer_tour_aoe;
 	monu->afficher = (void (*)(void *)) afficher_monument;
+	
+	nb_monument++;
+	
+	return monu;
+}
+
+monument_t * creer_monument(int x, int y)
+{
+	monument_t * monu = new_monument(x, y);
+	if(monu == NULL)
+		return NULL;
 	
 	//Fichier de sauvegarde
 	FILE * fic = fopen("fichier_tours.txt", "a");
@@ -43,9 +49,7 @@ monument_t * creer_monument(int x, int y)
 		printf("\tERREUR, ouverture du fichier de sauvgarde impossible !\n");
 		return NULL;
 	}
-	fprintf(fic, "MONUMENT\n");
-	fprintf(fic, "x=%d y=%d\n", x, y);
-	fprintf(fic, "niveau=1\n\n");
+	fprintf(fic, "MONUMENT %d %d 1", x, y);
 	fclose(fic);	
 	
 	return monu;
@@ -56,10 +60,12 @@ monument_t * creer_monument(int x, int y)
 int detruire_monument(monument_t ** monu)
 {
 	if( !tour_existe( *monu ) )
-		return OBJ_NULL;
+		return ERR_OBJ_NULL;
 	
 	free(*monu);
 	*monu = NULL;
 	
-	return OK;
+	nb_monument--;
+	
+	return ERR_OK;
 }

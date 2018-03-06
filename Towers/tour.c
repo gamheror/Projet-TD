@@ -31,24 +31,25 @@ int tour_existe( void * tour )
 
 /*-------- Modifications --------*/
 int evolution_tour( tour_t * tour )
-/* cout_évolution = niveau_tour * 100 */
+/* Fonction d'évolution d'une tour de base
+	cout_évolution = niveau_tour * 100 */
 {
 	if( !tour_existe(tour) )
-		return OBJ_NULL;
+		return ERR_OBJ_NULL;
 	
 	int n = tour->niveau;
 	
 	if(GOLD < 100*n)
-		return MANQUE_GOLD;
+		return ERR_GOLD;
 	if(n >= NIVEAU_MAX_TOUR)
-		return NIVEAU_MAX;
+		return ERR_NIVEAU_MAX;
 	
 	GOLD -= 100*n;
 		
 	tour->niveau++;
 	tour->degat *= MULT_DEGATS_TOUR;
 	
-	return OK;
+	return ERR_OK;
 }
 
 
@@ -56,10 +57,10 @@ int evolution_tour( tour_t * tour )
 int detruire_tour( tour_t ** tour )
 {
 	if( !tour_existe(*tour) )
-		return OBJ_NULL;
+		return ERR_OBJ_NULL;
 	
 	free(*tour);
 	*tour = NULL;
 	
-	return OK;
+	return ERR_OK;
 }

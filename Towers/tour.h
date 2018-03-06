@@ -32,8 +32,11 @@ typedef struct monument_s
 
 /*-------- Creation --------*/
 tour_t * creer_tour(int, int);
+tour_aoe_t * new_aoe(int, int);
 tour_aoe_t * creer_tour_aoe(int, int);
+tour_mono_t * new_mono(int, int);
 tour_mono_t * creer_tour_mono(int, int);
+monument_t * new_monument(int, int);
 monument_t * creer_monument(int, int);
 
 
@@ -41,15 +44,8 @@ monument_t * creer_monument(int, int);
 int tour_existe( void * );
 
 
-/*-------- Attaque --------*/
-void tour_aoe_attaquer(tour_aoe_t *, mobs_t *(*)[20]);
-void tour_mono_attaquer( tour_mono_t *, mobs_t *(*)[20] );
-
-
-/*-------- Modifications --------*/
+/*-------- Evolution --------*/
 int evolution_tour( tour_t * );
-int evoluer_tour_aoe( tour_aoe_t * );
-int evoluer_tour_mono( tour_mono_t * );
 
 
 /*-------- Destruction --------*/

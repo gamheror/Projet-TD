@@ -27,6 +27,9 @@ int rechercher_ennemi( tour_mono_t * mono, mobs_t * mat[][N] )
 	return 0;
 }
 
+
+/*-------- Attaque --------*/
+static
 void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 /* Fonction d'attaque d'une tour mono cible
 	Recherche un ennemi si elle n'a pas en cible */
@@ -57,6 +60,23 @@ void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 	}
 }
 
+
+/*-------- Évolution --------*/
+static
+int evoluer_tour_mono( tour_mono_t * mono )
+{
+	if( !tour_existe(mono) )
+		return ERR_OBJ_NULL;
+	
+	int rtn = evolution_tour( (void*) mono );
+	
+	if(rtn == ERR_OK)
+		printf("MONO <%02d,%02d> évolue au niveau %d, %d dégats\n",
+			mono->pos_x, mono->pos_y, mono->niveau, mono->degat );
+		
+	return rtn;
+}
+
 static
 void afficher_tour_mono( tour_mono_t * mono )
 {
@@ -67,31 +87,9 @@ void afficher_tour_mono( tour_mono_t * mono )
 }
 
 
-/*-------- Évolution --------*/
-int evoluer_tour_mono( tour_mono_t * mono )
-{
-	if( !tour_existe(mono) )
-		return OBJ_NULL;
-	
-	int rtn = evolution_tour( (void*) mono );
-	
-	if(rtn == OK)
-		printf("MONO <%02d,%02d> évolue au niveau %d, %d dégats\n",
-			mono->pos_x, mono->pos_y, mono->niveau, mono->degat );
-		
-	return rtn;
-}
-
-
 /*-------- Creation --------*/
-tour_mono_t * creer_tour_mono( int x, int y )
+tour_mono_t * new_mono(int x, int y)
 {
-	if(GOLD < PRIX_TOUR)
-	{
-		printf("\tGOLD insuffisant pour poser une tour AOE !\n");
-		return NULL;
-	}
-	
 	tour_t * temp = NULL;
 	tour_mono_t * mono = NULL;
 	
@@ -115,6 +113,21 @@ tour_mono_t * creer_tour_mono( int x, int y )
 	mono->evoluer = (int (*)(void *)) evoluer_tour_mono;
 	mono->afficher = (void (*)(void *)) afficher_tour_mono;
 	
+	return mono;
+}
+
+tour_mono_t * creer_tour_mono( int x, int y )
+{
+	if(GOLD < PRIX_TOUR)
+	{
+		printf("\tGOLD insuffisant pour poser une tour MONO !\n");
+		return NULL;
+	}
+	
+	tour_mono_t * mono = new_mono(x, y);
+	if(mono == NULL)
+		return NULL;
+	
 	GOLD -= PRIX_TOUR;
 	
 	//Fichier de sauvegarde
@@ -124,22 +137,21 @@ tour_mono_t * creer_tour_mono( int x, int y )
 		printf("\tERREUR, ouverture du fichier de sauvgarde impossible !\n");
 		return NULL;
 	}
-	fprintf(fic, "MONO\n");
-	fprintf(fic, "x=%d y=%d\n", x, y);
-	fprintf(fic, "niveau=1\n\n");
+	fprintf(fic, "\nMONO %d %d 1", x, y);
 	fclose(fic);
 	
 	return mono;
 }
 
+
 /*-------- Destruction --------*/
 int detruire_tour_mono( tour_mono_t ** mono )
 {
 	if( !tour_existe(*mono) )
-		return OBJ_NULL;
+		return ERR_OBJ_NULL;
 	
 	free(*mono);
 	*mono = NULL;
 	
-	return OK;
+	return ERR_OK;
 }
