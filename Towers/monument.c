@@ -52,6 +52,29 @@ int ajout_save(int x, int y)
 }
 
 
+/*-------- Attaque --------*/
+static
+void monument_attaquer(tour_aoe_t * monu, mobs_t * mat[][N])
+/* Fonction d'attaque d'une tour d'AOE */
+{
+	int x = monu->pos_x, y = monu->pos_y;
+	
+	for(int i = -RAYON_TOUR; i <= RAYON_TOUR; i++)
+		for(int j = -RAYON_TOUR; j <= RAYON_TOUR; j++)
+			if( LIMITES_MAP(x+i) && LIMITES_MAP(y+j) && mat[x+i][y+j] != NULL )
+			{
+				printf("MONU <%02d,%02d> attaque en <%02d,%02d> -%d PV\n", 
+					monu->pos_x, monu->pos_y, x+i, y+j, monu->degat );
+					
+				perte_vie( &mat[x+i][y+j], monu->degat );
+				
+				if( mat[x+i][y+j] == NULL )
+					printf("AOE  <%02d,%02d> a tuée <%02d,%02d>\n",
+						monu->pos_x, monu->pos_y, x+i, y+j );
+			}
+}
+
+
 /*-------- Évolution --------*/
 static
 int evoluer_monument( monument_t * monu )
@@ -104,6 +127,7 @@ monument_t * new_monument(int x, int y, int n)
 	monu->detruire = (int (*)(void **)) detruire_monument;
 	monu->evoluer = (int (*)(void *)) evoluer_monument;
 	monu->afficher = (void (*)(void *)) afficher_monument;
+	monu->attaquer = (void (*)(void *, void *(*)[N])) monument_attaquer;
 	
 	nb_monument++;
 	

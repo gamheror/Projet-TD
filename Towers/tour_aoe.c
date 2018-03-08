@@ -1,7 +1,5 @@
 #include "../all.h"
 
-#define LIMITES_MAP(x) (x >= 0 && x < N)
-
 /*-------- Sauvegarde --------*/
 static
 int modif_save(int aoe_x, int aoe_y)

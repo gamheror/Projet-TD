@@ -4,6 +4,8 @@
 #include "../all.h"
 #include "../Mobs/mobs.h"
 
+#define LIMITES_MAP(x) (x >= 0 && x < N)
+
 /*-------- Structures --------*/
 typedef struct tour_s
 {

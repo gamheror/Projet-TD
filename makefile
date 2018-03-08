@@ -1,8 +1,16 @@
-OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o test_map.o
-
-test_map: $(OBJ)
-	gcc $(OBJ) -lm -o test_map
+all : test_map interface
 	rm *.o
+
+OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o
+
+test_map: test_map.o $(OBJ)
+	gcc test_map.o $(OBJ) -lm -o test_map
+
+interface : interface.o $(OBJ)
+	gcc interface.o $(OBJ) -lm -o interface
+
+interface.o : interface.c
+	gcc -c interface.c
 
 test_map.o: test_map.c
 	gcc -c test_map.c
