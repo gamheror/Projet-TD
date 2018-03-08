@@ -153,4 +153,15 @@ Problème :
 06/03	Pierre : Fichier de sauvegarde des tours + Chargement
 
 À faire :
-		Modifier le fichhier de sauvegarde quand une tour evolue
+Ok		Modifier le fichhier de sauvegarde quand une tour evolue
+
+
+
+
+
+08/03	Pierre : La sauvegrade des tours est modifiée lorsqu'une tour évolue,
+				 Le chargement de la sauvegarde prend désormait en compte le niveau des tours
+
+Problème :
+		Perte_de_vie et detruire mobs :
+			erreur valgrind = Conditional jump or move depends on uninitialised value(s)

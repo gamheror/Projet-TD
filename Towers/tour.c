@@ -1,7 +1,7 @@
 #include "../all.h"
 
 /*-------- Creation --------*/
-tour_t * creer_tour( int x, int y )
+tour_t * creer_tour( int x, int y, int n )
 {
 	tour_t * tour = NULL;
 	
@@ -11,7 +11,7 @@ tour_t * creer_tour( int x, int y )
 		printf("\tERREUR, espace mémoire insuffisant pour la création d'une tour !\n");
 	else
 	{
-		tour->niveau = 1;
+		tour->niveau = n;
 		tour->rayon = RAYON_TOUR;
 		tour->cooldown = COOLDOWN_TOUR;
 		tour->pos_x = x;

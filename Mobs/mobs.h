@@ -23,7 +23,7 @@ typedef struct mobs_s
 
 
 /* Creation d'un objet mobs_t */
-mobs_t * creer_mobs(elem_t *);
+mobs_t * creer_mobs();
 
 /* Affiche la vie et les gold portes par le mob */
 void afficher_mobs(mobs_t * );

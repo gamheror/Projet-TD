@@ -51,7 +51,7 @@ void perte_vie (mobs_t ** mobs, int nb_degat)
 }
 
 
-mobs_t * creer_mobs(elem_t * elem)
+mobs_t * creer_mobs()
 {
 //	liste_t * liste = elem->premier;
 

@@ -1,6 +1,7 @@
 #include "map_tower.h"
 
-#define FORMAT_NUM(n) (n >= 0 && n < N)		//Format d'une coordonnées de la matrice 
+//Format des caracteristique d'une tour
+#define FORMAT_NUM(x, y, n) (x >= 0 && x < N && y >= 0 && y < N && n > 0 && n <= NIVEAU_MAX_TOUR)
 
 static int poser_monument(map_tower map)
 {
@@ -92,14 +93,14 @@ map_tower charger_map()
 			le niveau doit etre positif et inferieur a la limite
 			et la case visée doit etre vide.
 		Verifie que le type existe, si tel est le cas, créé la tour du type adequat au bon endroit */
-		if( FORMAT_NUM(x) && FORMAT_NUM(y) && n > 0 && n <= NIVEAU_MAX_TOUR && case_vide(map, x, y) )
+		if( FORMAT_NUM(x, y, n) && case_vide(map, x, y) )
 		{
 			if( strcmp(type, "MONUMENT") == 0 )
-				COORD(map, x, y) = (tour_t *) new_monument(x, y);
+				COORD(map, x, y) = (tour_t *) new_monument(x, y, n);
 			else if( strcmp(type, "MONO") == 0 )
-				COORD(map, x, y) = (tour_t *) new_mono(x, y);
+				COORD(map, x, y) = (tour_t *) new_mono(x, y, n);
 			else if( strcmp(type, "AOE") == 0 )
-				COORD(map, x, y) = (tour_t *) new_aoe(x, y);
+				COORD(map, x, y) = (tour_t *) new_aoe(x, y, n);
 		}
 	}
 	fclose(fic);

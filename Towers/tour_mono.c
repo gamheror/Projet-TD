@@ -1,5 +1,57 @@
 #include "../all.h"
 
+#define LIMITES_MAP(x) (x >= 0 && x < N)
+
+/*-------- Sauvegarde --------*/
+static
+int modif_save(int mono_x, int mono_y)
+/* Modifie la sauvegarde,
+	le niveau du monument est incrémenté,
+	prend en param les coord du monument */
+{
+	FILE * fic = fopen("fichier_tours.txt", "r+");
+	if(fic == NULL)
+		return ERR_OBJ_NULL;
+	
+	char type[9];
+	int x, y, n;
+	int trouve = 0;
+	//Cherche la tour, elle est identifiée par ses coordonnées
+	while( !trouve && !feof(fic) )
+	{
+		fscanf(fic, "%s %d %d %d", type, &x, &y, &n);
+		if(x == mono_x && y == mono_y)
+			trouve = 1;
+	}
+	//elle a été trouvée
+	if(trouve == 1)
+	{
+		fseek(fic, -1, SEEK_CUR); //Place la tete de lecture sur le caractere niveau
+		fprintf(fic, "%d", n+1); //Incremente le niveau
+	}
+	fclose(fic);
+	
+	return ERR_OK;
+}
+
+static
+int ajout_save(int x, int y)
+{
+	FILE * fic = fopen("fichier_tours.txt", "a");
+
+	if(!fic)
+	{
+		printf("\tERREUR, ouverture du fichier de sauvgarde impossible !\n");
+		return ERR_OBJ_NULL;
+	}
+	
+	fprintf(fic, "\nMONO %02d %02d 1", x, y);
+	fclose(fic);
+	
+	return ERR_OK;
+}
+
+
 static
 int rechercher_ennemi( tour_mono_t * mono, mobs_t * mat[][N] )
 /* La tour recherche autour d'elle la presence d'un ennemi
@@ -16,7 +68,7 @@ int rechercher_ennemi( tour_mono_t * mono, mobs_t * mat[][N] )
 			for(int j = -r; j <= r; j++)
 			{
 				//verifie que la coordonnees soit dans les limites du tableau et que la case contient pointe sur un ennemi
-				if( 0 <= (x+i) < N && 0 <= (y+j) < N && mat[x+i][y+j] != NULL )
+				if( LIMITES_MAP(x+i) && LIMITES_MAP(y+j) && mat[x+i][y+j] != NULL )
 				{
 					mono->cible = mat[x+i][y+j];
 					mono->x_cible = x+i;
@@ -36,7 +88,7 @@ void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 {
 	int rech = 1;
 	
-	if( mono->cible == NULL || mat[mono->x_cible][mono->y_cible] == NULL )//Si la tour ne possede pas de cible ou qu'elle pointe sur une case NULL
+	if( mono->cible == NULL /*|| mat[mono->x_cible][mono->y_cible] == NULL*/ )//Si la tour ne possede pas de cible
 		rech = rechercher_ennemi( mono, mat );
 //Si la tour n'a pas trouve d'ennemi, rech = 0
 //=> Ne pas attaquer si la tour na trouve pas d'ennemi
@@ -45,8 +97,8 @@ void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 	{
 		int x_c = mono->x_cible, y_c = mono->y_cible;
 
-		mono->afficher(mono);
-		printf(" attaque en <%d,%d> -%d PV\n", x_c, y_c, mono->degat );
+		printf("MONO <%02d,%02d> attaque en <%d,%d> -%d PV\n", 
+			mono->pos_x, mono->pos_y, x_c, y_c, mono->degat );
 
 		perte_vie( &mat[x_c][y_c], mono->degat );
 
@@ -54,8 +106,8 @@ void tour_mono_attaquer( tour_mono_t * mono, mobs_t * mat[][N] )
 		if( mat[x_c][y_c] == NULL )
 		{
 			mono->cible = NULL;
-			mono->afficher(mono);
-			printf(" a tuée <%d,%d>\n", x_c, y_c );
+			printf("MONO <%02d,%02d> a tuée <%d,%d>\n",
+				mono->pos_x, mono->pos_y, x_c, y_c );
 		}
 	}
 }
@@ -71,8 +123,13 @@ int evoluer_tour_mono( tour_mono_t * mono )
 	int rtn = evolution_tour( (void*) mono );
 	
 	if(rtn == ERR_OK)
+	{
 		printf("MONO <%02d,%02d> évolue au niveau %d, %d dégats\n",
 			mono->pos_x, mono->pos_y, mono->niveau, mono->degat );
+		
+		if(modif_save(mono->pos_x, mono->pos_y) != ERR_OK)
+			return ERR_OBJ_NULL;
+	}
 		
 	return rtn;
 }
@@ -88,12 +145,12 @@ void afficher_tour_mono( tour_mono_t * mono )
 
 
 /*-------- Creation --------*/
-tour_mono_t * new_mono(int x, int y)
+tour_mono_t * new_mono(int x, int y, int n)
 {
 	tour_t * temp = NULL;
 	tour_mono_t * mono = NULL;
 	
-	temp = creer_tour(x,y); //Utilise la fonction de creation d'une tour simple
+	temp = creer_tour(x, y, n); //Utilise la fonction de creation d'une tour simple
 	if(temp == NULL)
 		return NULL;
 	
@@ -105,7 +162,7 @@ tour_mono_t * new_mono(int x, int y)
 	}
 		
 	
-	mono->degat = DEGATS_TOUR_MONO;
+	mono->degat = DEGATS_TOUR_MONO * pow(MULT_DEGATS_TOUR, n-1);
 	mono->cible = NULL;
 
 	mono->detruire = (int (*)( void ** )) detruire_tour_mono;
@@ -124,21 +181,15 @@ tour_mono_t * creer_tour_mono( int x, int y )
 		return NULL;
 	}
 	
-	tour_mono_t * mono = new_mono(x, y);
+	tour_mono_t * mono = new_mono(x, y, 1);
 	if(mono == NULL)
 		return NULL;
 	
 	GOLD -= PRIX_TOUR;
 	
 	//Fichier de sauvegarde
-	FILE * fic = fopen("fichier_tours.txt", "a");
-	if(!fic)
-	{
-		printf("\tERREUR, ouverture du fichier de sauvgarde impossible !\n");
+	if(ajout_save(x, y) != ERR_OK)
 		return NULL;
-	}
-	fprintf(fic, "\nMONO %d %d 1", x, y);
-	fclose(fic);
 	
 	return mono;
 }

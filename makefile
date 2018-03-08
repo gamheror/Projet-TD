@@ -1,7 +1,7 @@
 OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o test_map.o
 
 test_map: $(OBJ)
-	gcc $(OBJ) -o test_map
+	gcc $(OBJ) -lm -o test_map
 	rm *.o
 
 test_map.o: test_map.c
