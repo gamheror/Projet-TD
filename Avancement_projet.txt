@@ -185,13 +185,13 @@ Probleme: Erreur de segmentation
 
 
 ----Séance----
-13/02	Pierre : 
+13/02	Pierre : SDL
 		
-		Thomas :
+		Thomas : Structure mobs_t, attaque des mobs
 		
-		Antoine :
+		Antoine : SDL
 		
-		Quentin :
+		Quentin : deplacement mobs
 
 À faire :
 		Points de vie sur le monument + fnct d'attaque des mobs sur monu
