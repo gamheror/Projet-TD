@@ -27,7 +27,7 @@
 #define NIVEAU_MAX_TOUR		5
 
 #define DEGATS_TOUR_MONO	150
-#define DEGATS_TOUR_AOE		50
+#define DEGATS_TOUR_AOE		35
 #define DEGATS_MONU			20
 
 #define PRIX_TOUR			500

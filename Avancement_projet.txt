@@ -26,7 +26,7 @@
 		
 À faire:
 Ok		Fonction de perte de vie des mobs
-		Finir la fonction de gestion de la prise en main
+Ok		Finir la fonction de gestion de la prise en main
 
 
 
@@ -116,7 +116,7 @@ Ok		Fichier(s) de sauvegarde
 				 Chemin créé + jointure coordonée mobs avec la liste
 
 Problème :
-		Erreur de segmentation avec l'affichage du chemin
+Ok		Erreur de segmentation avec l'affichage du chemin
 
 A faire :
 		Trouver comment assembler le liste du chemin avec l'avancement des mobs
@@ -161,7 +161,38 @@ Ok		Modifier le fichhier de sauvegarde quand une tour evolue
 
 08/03	Pierre : La sauvegrade des tours est modifiée lorsqu'une tour évolue,
 				 Le chargement de la sauvegarde prend désormait en compte le niveau des tours
+				 Interface temporaire
+
+À faire :
+		Système de vagues
+		Fichier de sauvegarde des stats (vagues, GOLD, ...)
+		Déplacement des mobs
+		(Log file)
+		SDL
 
 Problème :
 		Perte_de_vie et detruire mobs :
-			erreur valgrind = Conditional jump or move depends on uninitialised value(s)
+			erreur valgrind renvoie "Conditional jump or move depends on uninitialised value(s)"
+
+
+09/03	Thomas: Affichage d'une matrice avec le chemin 
+		Début de la fonction de déplacement
+
+Probleme: Erreur de segmentation
+	  Liste.h non reconnu dans mobs.c
+
+
+
+
+----Séance----
+13/02	Pierre : 
+		
+		Thomas :
+		
+		Antoine :
+		
+		Quentin :
+
+À faire :
+		Points de vie sur le monument + fnct d'attaque des mobs sur monu
+		mobs doivent pointer sur le monu

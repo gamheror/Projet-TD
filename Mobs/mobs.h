@@ -2,7 +2,6 @@
 #define _MOB_H_
 
 #include "../all.h"
-#include "../Chemin/liste.h"
 
 typedef struct mobs_s
 {
