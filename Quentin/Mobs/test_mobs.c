@@ -2,17 +2,20 @@
 #include <string.h>
 #include <time.h>
 
-#include "../all.h"
+#include "mobs.h"
 
 int main()
 {
 	srand(time(NULL));
-
-	elem_t * elem;
-	liste_t * liste = initialisation();
-	mobs_t * mobs;
 	
-	afficher_liste(liste);
+	mobs_t * mobs;
+	elem_t * elem;
+	
 	mobs = creer_mobs(elem);
 	afficher_mobs(mobs);
+	perte_vie(&mobs,rand()%400);
+	afficher_mobs(mobs);
+	detruire_mobs(&mobs);
+	
+	
 }

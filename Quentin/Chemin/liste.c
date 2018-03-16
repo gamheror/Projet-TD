@@ -1,4 +1,4 @@
-#include "../all.h"
+#include "liste.h"
 
 liste_t * initialisation()
 {
@@ -19,7 +19,7 @@ liste_t * initialisation()
 
 void insertion(liste_t * liste)
 {
-	FILE * fichier = fopen("../Chemin/chemin.txt", "r");
+	FILE * fichier = fopen("chemin.txt", "r");
 	
 	if(fichier == NULL)
 	{
@@ -53,7 +53,7 @@ int liste_vide(liste_t * liste)
 
 int fin_liste(liste_t * liste)
 {
-	return liste->courant == NULL;
+	return liste->courant->suivant == NULL;
 }
 
 void afficher_liste(liste_t * liste)
@@ -71,6 +71,8 @@ void afficher_liste(liste_t * liste)
 	}
 	else
 		printf("Liste vide !\n");
+	
+	printf("Fin de la liste\n");
 }
 
 void liste_debut(liste_t * liste)

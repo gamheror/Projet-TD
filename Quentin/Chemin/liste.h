@@ -1,7 +1,8 @@
 #ifndef _LISTE_H_
 #define _LISTE_H_
 
-#include "../all.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct elem_s
 {

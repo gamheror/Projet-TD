@@ -10,13 +10,12 @@ int mobs_existe(mobs_t * const mobs)
 void afficher_mobs(mobs_t * mobs)
 {
 	if(mobs_existe(mobs))
-		printf("{mob <%d,%d> {%d PV}}\n",mobs->pos->x, mobs->pos->y, mobs->life);
+		printf("{mob <%d,%d> {%d PV}}\n",mobs->pos->courant->x, mobs->pos->courant->y, mobs->life);
 
 	else
 	{
 		printf("{mob NULL}\n");
 	}
-
 }
 
 void detruire_mobs(mobs_t ** mobs)
@@ -26,7 +25,7 @@ void detruire_mobs(mobs_t ** mobs)
 		int mob_g = rand()%( DROP_MOB_MAX -DROP_MOB_MIN +1 ) +DROP_MOB_MIN;
 		GOLD += mob_g;
 		
-		printf("mob <%d, %d> meurt \n", (*mobs)->pos->x, (*mobs)->pos->y);
+		printf("mob <%d, %d> meurt \n", (*mobs)->pos->courant->x, (*mobs)->pos->courant->y);
 		printf("GOLD +%d : %d\n", mob_g, GOLD);
 		
 		free(*mobs);
@@ -35,7 +34,6 @@ void detruire_mobs(mobs_t ** mobs)
 		
 		compteur_mobs --;
 	}
-
 }
 
 
@@ -51,15 +49,18 @@ void perte_vie (mobs_t ** mobs, int nb_degat)
 }
 
 
-mobs_t * creer_mobs(elem_t * elem)
+mobs_t * creer_mobs(/*elem_t * elem*/)
 {
 
+
 	mobs_t * mobs = malloc(sizeof(mobs_t));
-	
 
 	mobs->life = VIE_MOB;
 	mobs->v_deplacement = V_DEP_MOB;
 	mobs->attaque = DEGAT_MOB;
+	
+//	mobs->pos_x = elem->x;
+//	mobs->pos_y = elem->y;
 
 	mobs->detruire = detruire_mobs;
 	
@@ -68,21 +69,19 @@ mobs_t * creer_mobs(elem_t * elem)
 	return mobs;
 }
 
-/*void attaque_monum(mobs_t * mobs, monument_t * monum)
+/* Changement des coordonnées du mobs*/
+/*void changement_coord(mobs_t * mobs)
 {
 	liste_t * liste;
-	life = monum->life;
-	atk = mobs->attaque;
+	elem_t * elem;
 
-	if(fin_liste(liste))
-	{
-		while(mobs_existe(mobs) && tou)
-		{
-			life -= atk;
-		}
-	}
-}*/
+	liste_suivant(liste);
+	elem = element_courant(liste);
 
+	mobs->pos_x = elem->x;
+	mobs->pos_y = elem->y;
+}
+*/
 /*void vague(int multiple)
 {
 	mobs_t * mobs;
@@ -95,3 +94,4 @@ mobs_t * creer_mobs(elem_t * elem)
 
 	}
 }*/
+

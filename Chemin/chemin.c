@@ -1,8 +1,12 @@
-#include "liste.h"
+#include "Liste.h"
 
 int main()
 {
-	liste_t * liste = initialisation();
-	
+	elem_t * elem;
+	liste_t * liste;
+	mobs_t * mobs;
+
+	liste= initialisation();
+	mobs = creer_mobs(elem);
 	afficher_liste(liste);
 }
