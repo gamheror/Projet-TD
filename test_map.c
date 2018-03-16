@@ -54,6 +54,13 @@ int main()
 	map = charger_map();
 	afficher_map_tower(map);
 	
+	
+	printf("Attaque sur le monument :\n");
+	attaquer_monument(map, 120);
+	printf("\n");	
+
+	
+		
 	evoluer_tour(map, 4, 4);
 	evoluer_tour(map, 1, 1);
 	evoluer_tour(map, 4, 3);

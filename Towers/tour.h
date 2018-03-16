@@ -29,6 +29,8 @@ typedef struct tour_mono_s
 typedef struct monument_s
 {
 	#include "attributs_tour.h"
+	
+	int pv;
 } monument_t;
 
 
@@ -48,6 +50,10 @@ int tour_existe( void * );
 
 /*-------- Evolution --------*/
 int evolution_tour( tour_t * );
+
+
+int get_monu_pos(int *, int *);
+int degats_monu(monument_t **, int);
 
 
 /*-------- Destruction --------*/

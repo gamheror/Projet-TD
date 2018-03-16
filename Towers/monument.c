@@ -2,6 +2,8 @@
 
 static int nb_monument = 0;
 
+static int m_x = -1, m_y = -1;
+
 
 /*-------- Sauvegarde --------*/
 static
@@ -121,13 +123,18 @@ monument_t * new_monument(int x, int y, int n)
 	monument_t * monu = (monument_t *) new_aoe(x, y, n);
 	if( monu == NULL )
 		return NULL;
+	monu = realloc(monu, sizeof(*monu));
 	
 	monu->degat = DEGATS_MONU * pow(MULT_DEGATS_TOUR, n-1);
+	monu->pv = PV_MONU;
 
 	monu->detruire = (int (*)(void **)) detruire_monument;
 	monu->evoluer = (int (*)(void *)) evoluer_monument;
 	monu->afficher = (void (*)(void *)) afficher_monument;
 	monu->attaquer = (void (*)(void *, void *(*)[N])) monument_attaquer;
+	
+	m_x = x;
+	m_y = y;
 	
 	nb_monument++;
 	
@@ -148,6 +155,34 @@ monument_t * creer_monument(int x, int y)
 }
 
 
+int get_monu_pos(int * x, int * y)
+{
+	if(m_x != -1 && m_x != *y)
+	{
+		*x = m_x;
+		*y = m_y;
+	}
+	else
+		return 1;
+	return 0;
+}
+
+
+int degats_monu(monument_t ** monu, int qtt)
+{
+	if(tour_existe(monu))
+	{
+		(*monu)->pv -= qtt;
+		if((*monu)->pv <= 0)
+			detruire_monument(monu);
+		printf("Monument rencoie %d degats %d pv\n", qtt, (*monu)->pv);
+	}
+	else
+		return 1;
+	return 0;
+}
+
+
 /*-------- Destruction --------*/
 int detruire_monument(monument_t ** monu)
 {
@@ -156,6 +191,9 @@ int detruire_monument(monument_t ** monu)
 	
 	free(*monu);
 	*monu = NULL;
+	
+	m_x = -1;
+	m_y = m_x;
 	
 	nb_monument--;
 	

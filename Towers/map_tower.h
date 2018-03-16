@@ -49,6 +49,7 @@ int evoluer_tour(map_tower, int, int);				//La tour en x,y evolue
 
 int attaquer_tour(map_tower, mobs_t *(*)[20]);		//Les tours de la map effectue une attaque
 void afficher_map_tower(map_tower);					//Affiche la map
+int attaquer_monument(map_tower, int);				//Le monument est attaqué + nb pv de l'attaque
 
 
 /*-------- Destruction --------*/

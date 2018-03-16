@@ -30,6 +30,8 @@
 #define DEGATS_TOUR_AOE		35
 #define DEGATS_MONU			20
 
+#define PV_MONU				2500
+
 #define PRIX_TOUR			500
 
 #define MULT_DEGATS_TOUR	1.2

@@ -191,6 +191,22 @@ void afficher_map_tower(map_tower map)
 	}
 }
 
+int attaquer_monument(map_tower map, int degats)
+{
+	if(!map_existe(map))
+	{
+		return 1;
+	}
+	
+	int x, y;
+	
+	get_monu_pos(&x, &y);
+	
+	degats_monu( (monument_t**) &COORD(map, x, y), degats );
+	
+	return 0;
+}
+
 
 /*-------- Destruction --------*/
 int detruire_map_tower( map_tower * map )

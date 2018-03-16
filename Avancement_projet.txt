@@ -107,7 +107,7 @@ Ok		Fichier(s) de sauvegarde
 À faire:
         Déplacement des mobs
         SDL
-        Mécaniques de jeu
+Ok		Mécaniques de jeu
 
 
 
@@ -119,7 +119,7 @@ Problème :
 Ok		Erreur de segmentation avec l'affichage du chemin
 
 A faire :
-		Trouver comment assembler le liste du chemin avec l'avancement des mobs
+Ok		Trouver comment assembler le liste du chemin avec l'avancement des mobs
 
 
 
@@ -179,7 +179,7 @@ Problème :
 		Début de la fonction de déplacement
 
 Probleme: Erreur de segmentation
-	  Liste.h non reconnu dans mobs.c
+		Liste.h non reconnu dans mobs.c
 
 
 
@@ -194,5 +194,15 @@ Probleme: Erreur de segmentation
 		Quentin : deplacement mobs
 
 À faire :
-		Points de vie sur le monument + fnct d'attaque des mobs sur monu
-		mobs doivent pointer sur le monu
+Ok		Points de vie sur le monument + fnct d'attaque des mobs sur monu
+
+
+
+
+
+----Séance----
+16/03	Pierre : degats sur le monument, SDL timer
+
+		Antoine : SDL, places d'images
+		
+		Quentin, Thomas : Déplacement des mobs
