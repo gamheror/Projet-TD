@@ -13,7 +13,7 @@ int main(){
 	mob[0]->caract = 'b';
 	mob[0]->v_deplacement = 1;
 
-	mob[1] = creer_mobs()  ;
+	mob[1] = creer_mobs();
 	mob[1]->pos = NULL;	
 	mob[1]->caract = 'l';
 	mob[1]->v_deplacement = 2;

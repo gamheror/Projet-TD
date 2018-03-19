@@ -218,7 +218,20 @@ Ok		Points de vie sur le monument + fnct d'attaque des mobs sur monu
 Probleme :
 		Probleme de seg fault dans mobs.c
 
+
+
+
+
+
+
+
+----Séance----
 19/03 Thomas : Modification de la fonction attaquer
 		   Quatre fonctions de création de mobs (Tank, normal, degat et Boss)
 		   Correction de bug
 		   Aide sur le déplacement des mobs
+	Quentin : Déplacement mobs
+	
+	Pierre : SDL timer
+	
+	Antoine : SDL plateau
