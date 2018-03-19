@@ -10,7 +10,7 @@ int mobs_existe(mobs_t * const mobs)
 void afficher_mobs(mobs_t * mobs)
 {
 	if(mobs_existe(mobs))
-		printf("{mob <%d,%d> {%d PV}}\n",mobs->pos->x, mobs->pos->y, mobs->life);
+		printf("{mob <%d,%d> {%d PV}}\n",mobs->pos->courant->x, mobs->pos->courant->y, mobs->life);
 
 	else
 	{
@@ -26,7 +26,7 @@ void detruire_mobs(mobs_t ** mobs)
 		int mob_g = rand()%( DROP_MOB_MAX -DROP_MOB_MIN +1 ) +DROP_MOB_MIN;
 		GOLD += mob_g;
 		
-		printf("mob <%d, %d> meurt \n", (*mobs)->pos->x, (*mobs)->pos->y);
+		printf("mob <%d, %d> meurt \n", (*mobs)->pos->courant->x, (*mobs)->pos->courant->y);
 		printf("GOLD +%d : %d\n", mob_g, GOLD);
 		
 		free(*mobs);
@@ -35,11 +35,13 @@ void detruire_mobs(mobs_t ** mobs)
 		
 		compteur_mobs --;
 	}
+	else
+		printf("Le mob n'existe pas");
 
 }
 
 
-void perte_vie (mobs_t ** mobs, int nb_degat)
+void perte_vie(mobs_t ** mobs, int nb_degat)
 {
 	if (mobs_existe(*mobs))
 	{
@@ -51,47 +53,86 @@ void perte_vie (mobs_t ** mobs, int nb_degat)
 }
 
 
-mobs_t * creer_mobs(elem_t * elem)
+mobs_t * creer_mobs_normal()
 {
-
-	mobs_t * mobs = malloc(sizeof(mobs_t));
+	mobs_t * mobs_normal = malloc(sizeof(mobs_t));
 	
+	mobs_normal->life = VIE_MOB;
+	mobs_normal->v_deplacement = V_DEP_MOB *2;
+	mobs_normal->attaque = DEGAT_MOB;
+	mobs_normal->caract = 'N';
+	
+	mobs_normal->pos = NULL;
 
-	mobs->life = VIE_MOB;
-	mobs->v_deplacement = V_DEP_MOB;
-	mobs->attaque = DEGAT_MOB;
-
-	mobs->detruire = detruire_mobs;
+	mobs_normal->detruire = detruire_mobs;
 	
 	compteur_mobs ++;
 
-	return mobs;
+	return mobs_normal;
 }
 
-/*void attaque_monum(mobs_t * mobs, monument_t * monum)
+mobs_t * creer_mobs_tank()
 {
-	liste_t * liste;
-	life = monum->life;
-	atk = mobs->attaque;
+	mobs_t * mobs_tank = malloc(sizeof(mobs_t));
+	
+	mobs_tank->life = VIE_MOB *3;
+	mobs_tank->v_deplacement = V_DEP_MOB *4;
+	mobs_tank->attaque = DEGAT_MOB *0,8;
+	mobs_tank->caract = 'T';
+
+	mobs_tank->pos = NULL;
+
+	mobs_tank->detruire = detruire_mobs;
+	
+	compteur_mobs ++;
+
+	return mobs_tank;
+}
+
+mobs_t * creer_mobs_degat()
+{
+	
+	mobs_t * mobs_degat = malloc(sizeof(mobs_t));
+	
+	mobs_degat->life = VIE_MOB *0,6;
+	mobs_degat->v_deplacement = V_DEP_MOB;
+	mobs_degat->attaque = DEGAT_MOB *2;
+	mobs_degat->caract = 'D';
+
+	mobs_degat->pos = NULL;
+
+	mobs_degat->detruire = detruire_mobs;
+	
+	compteur_mobs ++;
+
+	return mobs_degat;
+}
+
+mobs_t * creer_mobs_boss()
+{
+	
+	mobs_t * mobs_boss = malloc(sizeof(mobs_t));
+	
+	mobs_boss->life = VIE_MOB *4;
+	mobs_boss->v_deplacement = V_DEP_MOB;
+	mobs_boss->attaque = DEGAT_MOB *3;
+	mobs_boss->caract = 'B';
+	
+	mobs_boss->pos = NULL;
+
+	mobs_boss->detruire = detruire_mobs;
+	
+	compteur_mobs ++;
+
+	return mobs_boss;
+}
+void attaque_monum(mobs_t * mobs)
+{
+	monument_t * monum;
+	liste_t * liste = mobs->pos;
 
 	if(fin_liste(liste))
 	{
-		while(mobs_existe(mobs) && tou)
-		{
-			life -= atk;
-		}
+		if(degats_monu(&monum, mobs->attaque) != -1);
 	}
-}*/
-
-/*void vague(int multiple)
-{
-	mobs_t * mobs;
-
-	while(compteur_mobs<NB_MOB)
-	{
-		creer_mobs;
-		afficher_mobs(mobs);
-		printf("\n%d \n",compteur_mobs);
-
-	}
-}*/
+}

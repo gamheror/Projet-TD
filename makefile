@@ -1,7 +1,7 @@
 all : test_map interface
 	rm *.o
 
-OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o
+OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o liste.o
 
 test_map: test_map.o $(OBJ)
 	gcc test_map.o $(OBJ) -lm -o test_map
@@ -32,3 +32,6 @@ monument.o: Towers/monument.c
 
 map_tower.o: Towers/map_tower.c
 	gcc -c Towers/map_tower.c
+
+liste.o : Chemin/liste.c
+	gcc -c Chemin/liste.c

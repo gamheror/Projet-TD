@@ -28,9 +28,9 @@ int main()
 	for(int i = 0; i < N; i++)
 		for(int j = 0; j < N; j++)
 			mobs[i][j] = NULL;
-	mobs[2][2] = creer_mobs();
-	mobs[2][3] = creer_mobs();
-	mobs[3][2] = creer_mobs();
+	mobs[2][2] = creer_mobs_tank();
+	mobs[2][3] = creer_mobs_tank();
+	mobs[3][2] = creer_mobs_normal();
 	
 	printf("\n\tInitialisation de la map\n");
 	map = init_mat_tower();

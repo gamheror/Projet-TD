@@ -80,13 +80,16 @@ void spawn()
 
 void affichage()
 /*
-	affiche les tours et les mobs
+	affiche les tours et les mobs + mise en forme
 */
 {
-	printf("\n---- GOLD %5d ----\n", GOLD);
-		
+	printf("\n---- GOLD %5d ----\n   ", GOLD);
+	
+	for(int i = 0; i < N; i++) printf("_");
+	printf("\n");
 	for(int i = 0; i < N; i++)
 	{
+		printf("%02d|", i);
 		for(int j = 0; j < N; j++)
 		{
 			if( COORD(map, j, i) != NULL )
@@ -96,10 +99,20 @@ void affichage()
 			else
 				printf(" ");
 		}
-		printf("\n");
+		printf("|\n");
 	}
-	
-	printf("--------------------\n");
+	printf("   ");
+	for(int i = 0; i < N; i++) printf("_");
+	printf("\n");
+	/* Affichage des coordonnées */
+	printf("   ");
+	for(int i = 0; i < N; i++)
+		printf("%d", i/10);
+	printf("\n   ");
+	for(int i = 0; i < N; i++)
+		printf("%d", i%10);
+	printf("\n\n");
+	/**/
 }
 
 /*
@@ -210,4 +223,6 @@ int main()
 			detruire_mobs(&mobs[i%N][i/N]);
 	
 	printf("Au revoir !\n");
+	
+	SDL_Quit();
 }

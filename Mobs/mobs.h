@@ -2,7 +2,7 @@
 #define _MOB_H_
 
 #include "../all.h"
-#include "../Chemin/Liste.h"
+#include "../Chemin/liste.h"
 
 typedef struct mobs_s
 {
@@ -12,7 +12,7 @@ typedef struct mobs_s
 	char caract;
 	
 	//position des mobs
-	elem_t * pos;
+	liste_t * pos;
 
 	//trouver comment insérer la structure attaque;
 	//void (*perte_vie)(struct mobs_t *);
@@ -22,7 +22,9 @@ typedef struct mobs_s
 
 
 /* Creation d'un objet mobs_t */
-mobs_t * creer_mobs();
+mobs_t * creer_mobs_normal();
+mobs_t * creer_mobs_tank();
+mobs_t * creer_mobs_degat();
 
 /* Affiche la vie et les gold portes par le mob */
 void afficher_mobs(mobs_t * );
@@ -33,7 +35,6 @@ void perte_vie (mobs_t ** , int);
 /* Libere l'espace memoire alloue a un mob */
 void detruire_mobs(mobs_t **);
 
-/* création de mobs pour une vague*/
-/*void vague(int);*/
-
+/* Assaine des dégats au monument */
+void attaque_monum(mobs_t *);
 #endif

@@ -1,70 +1,71 @@
-#include "../all"
+#include "../all.h"
 
 int main(){
-	typedef struct {int x; int y;}t_coord;
-	typedef struct {t_coord  pos; char nom; int speed;int blbl;}t_mob;
-	typedef struct {char mobs[10];}t_map;
+	typedef struct {char n_mobs[10];}t_map;
 	
-	t_mob mob[4];
-	t_coord chemin[4];
+	mobs_t *mob[4];
 	t_map map[4][4];
 	int temps;
 	int i,j;
+
+	mob[0] = creer_mobs();
+	mob[0]->pos = NULL;	
+	mob[0]->caract = 'b';
+	mob[0]->v_deplacement = 1;
+
+	mob[1] = creer_mobs()  ;
+	mob[1]->pos = NULL;	
+	mob[1]->caract = 'l';
+	mob[1]->v_deplacement = 2;
+
+	mob[2] = creer_mobs();
+	mob[2]->pos = NULL;	
+	mob[2]->caract = 'b';
+	mob[2]->v_deplacement = 1;
 	
-	chemin[0].x = 0;
-	chemin[0].y = 1;
-	chemin[1].x = 1;
-	chemin[1].y = 1;
-	chemin[2].x = 1;
-	chemin[2].y = 2;
-	chemin[3].x = 2;
-	chemin[3].y = 2;
-	
-	mob[0].pos = chemin[0];	
-	mob[0].nom = 'b';
-	mob[0].speed = 1;
-	mob[0].blbl = 0;
-	mob[1].pos = chemin[0];	
-	mob[1].nom = 'l';
-	mob[1].speed = 2;
-	mob[1].blbl = 0;
-	mob[2].pos = chemin[0];	
-	mob[2].nom = 'b';
-	mob[2].speed = 1;
-	mob[2].blbl = 0;
+	mob[3] = creer_mobs();
+	mob[3]->pos = NULL;	
+	mob[3]->caract = 'l';
+	mob[3]->v_deplacement = 2;
+
 	
 	for ( i=0; i!=4; i++){
 		for ( j=0; j!=4; j++){
-			map[i][j].mobs[0] = '.';
-			map[i][j].mobs[1] = '.';
-			map[i][j].mobs[2] = '.';
-			map[i][j].mobs[3] = '.'; 
-			map[i][j].mobs[4] = '\0'; 
+			map[i][j].n_mobs[0] = '0';
+			map[i][j].n_mobs[1] = '0';
+			map[i][j].n_mobs[2] = '0';
+			map[i][j].n_mobs[3] = '0';
+			map[i][j].n_mobs[4] = '\0'; 
 			
 		}
 	}	
 	
-	for (temps = 0;temps !=3; temps++){
+	for (temps = 0;temps !=15; temps++){
 		for ( i=0; i!=4; i++){
-			if (mob[i].nom == 'b'){
-				map[mob[i].pos.x][mob[i].pos.y].mobs[i] = '.';
-				mob[i].blbl++;
-				mob[i].pos = chemin[mob[i].blbl];
+			if (temps % mob[i]->v_deplacement == 0){
+				if(mob[i]->pos == NULL){
+					mob[i]->pos = initialisation();
+					mob[i]->pos->courant = mob[i]->pos->premier;
+				}
+				if (fin_liste(mob[i]->pos)){
+				} 
+				else{
+					map[mob[i]->pos->courant->x][mob[i]->pos->courant->y].n_mobs[i] = '0';
+					mob[i]->pos->courant = mob[i]->pos->courant->suivant;
+				}
 			}
-			if (mob[i].nom == 'l' && temps%2 ==0){
-				map[mob[i].pos.x][mob[i].pos.y].mobs[i] = '.';
-				mob[i].blbl++;
-				mob[i].pos = chemin[mob[i].blbl];
-			}
-			map[mob[i].pos.x][mob[i].pos.y].mobs[i] = mob[i].nom;
+		map[mob[i]->pos->courant->x][mob[i]->pos->courant->y].n_mobs[i] = mob[i]->caract;
 		}
-		for ( i=1; i!=4; i++){
+
+		for ( i=0; i!=4; i++){
 			printf("\n");
-			for ( j=1; j!=4; j++){
-				printf("%s ", map[i][j].mobs); 
+			for ( j=0; j!=4; j++){
+				printf("%s ", map[i][j].n_mobs); 
 			}
 		}	
 		printf("\n");
 		printf("\n");
-	}	
+	}
+	
+	return(0);	
 }

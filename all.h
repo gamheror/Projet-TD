@@ -9,7 +9,7 @@
 
 #include "Towers/tours.h"
 #include "Mobs/mobs.h"
-#include "Chemin/Liste.h"
+#include "Chemin/liste.h"
 
 /*-------- Constante --------*/
 
@@ -18,7 +18,7 @@
 
 /* Ennemis */
 #define VIE_MOB			200
-#define V_DEP_MOB		10
+#define V_DEP_MOB		1
 #define DEGAT_MOB		15
 #define NB_MOB			5
 #define DROP_MOB_MIN	20

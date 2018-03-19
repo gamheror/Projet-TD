@@ -71,7 +71,7 @@ void spawn()
 			x = rand()%N;
 			y = rand()%N;
 		}while(!case_vide(map, x, y));
-		mobs[x][y] = creer_mobs();
+		mobs[x][y] = creer_mobs_normal();
 		nb--;
 	}
 }

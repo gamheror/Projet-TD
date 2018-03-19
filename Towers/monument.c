@@ -71,7 +71,7 @@ void monument_attaquer(tour_aoe_t * monu, mobs_t * mat[][N])
 				perte_vie( &mat[x+i][y+j], monu->degat );
 				
 				if( mat[x+i][y+j] == NULL )
-					printf("AOE  <%02d,%02d> a tuée <%02d,%02d>\n",
+					printf("MONU  <%02d,%02d> a tuée <%02d,%02d>\n",
 						monu->pos_x, monu->pos_y, x+i, y+j );
 			}
 }

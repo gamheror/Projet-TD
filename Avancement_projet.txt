@@ -187,11 +187,11 @@ Probleme: Erreur de segmentation
 ----Séance----
 13/02	Pierre : SDL
 		
-		Thomas : Structure mobs_t, attaque des mobs
+	Thomas : Structure mobs_t, attaque des mobs
 		
-		Antoine : SDL
+	Antoine : SDL
 		
-		Quentin : deplacement mobs
+	Quentin : deplacement mobs
 
 À faire :
 Ok		Points de vie sur le monument + fnct d'attaque des mobs sur monu
@@ -203,6 +203,22 @@ Ok		Points de vie sur le monument + fnct d'attaque des mobs sur monu
 ----Séance----
 16/03	Pierre : degats sur le monument, SDL timer
 
-		Antoine : SDL, places d'images
+	Antoine : SDL, places d'images
 		
-		Quentin, Thomas : Déplacement des mobs
+	Quentin, Thomas : Déplacement des mobs
+
+
+
+
+
+17/03	Pierre : interface
+	Thomas (en local): Changement des fonction de créations des mobs (3 fonctions de réation : mobs_degat, mobs_tank, mobs_boss)
+		 Fonction d'attaque à tester
+
+Probleme :
+		Probleme de seg fault dans mobs.c
+
+19/03 Thomas : Modification de la fonction attaquer
+		   Quatre fonctions de création de mobs (Tank, normal, degat et Boss)
+		   Correction de bug
+		   Aide sur le déplacement des mobs
