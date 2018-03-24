@@ -226,12 +226,15 @@ Probleme :
 
 
 ----Séance----
-19/03 Thomas : Modification de la fonction attaquer
-		   Quatre fonctions de création de mobs (Tank, normal, degat et Boss)
-		   Correction de bug
-		   Aide sur le déplacement des mobs
+19/03 	Thomas : Modification de la fonction attaquer
+		 Quatre fonctions de création de mobs (Tank, normal, degat et Boss)
+		 Correction de bug
+		 Aide sur le déplacement des mobs
+
 	Quentin : Déplacement mobs
 	
 	Pierre : SDL timer
 	
 	Antoine : SDL plateau
+
+20/03	Thomas : Fonction de création de vague via fichier

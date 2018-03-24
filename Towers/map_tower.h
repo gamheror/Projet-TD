@@ -19,14 +19,10 @@
 #ifndef _MAP_TOWER_H_
 #define _MAP_TOWER_H_
 
-#include "../all.h"
+#include "tours.h"
 
 /*-------- Macro --------*/
 #define COORD(map, x, y) (*(map +y*N +x))
-
-
-/*-------- Enumération --------*/
-typedef enum {AOE, MONO} type_tour;
 
 
 /*-------- Type --------*/
@@ -50,6 +46,8 @@ int evoluer_tour(map_tower, int, int);				//La tour en x,y evolue
 int attaquer_tour(map_tower, mobs_t *(*)[20]);		//Les tours de la map effectue une attaque
 void afficher_map_tower(map_tower);					//Affiche la map
 int attaquer_monument(map_tower, int);				//Le monument est attaqué + nb pv de l'attaque
+
+type_tour get_type_tour(map_tower, int, int);		//Renvoie le tyoe de la tour aux coord, -1 si case vide, -2 si map NULL
 
 
 /*-------- Destruction --------*/

@@ -1,16 +1,6 @@
 #ifndef _ALL_H_
 #define _ALL_H_
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <string.h>
-#include <math.h>
-
-#include "Towers/tours.h"
-#include "Mobs/mobs.h"
-#include "Chemin/liste.h"
-
 /*-------- Constante --------*/
 
 /* Matrices */
@@ -56,6 +46,7 @@ typedef enum
 	ERR_FICHIER_VIDE			//Le fichier de sauvegarde est vide
 } code_err;
 
+typedef enum {AOE, MONO, MONU} type_tour;
 
 /*-------- Variable globale --------*/
 int GOLD;

@@ -1,19 +1,24 @@
-all : test_map interface
-	rm *.o
-
 OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o liste.o
 
-test_map: test_map.o $(OBJ)
-	gcc test_map.o $(OBJ) -lm -o test_map
+
+all : map
+	rm *.o
+
 
 interface : interface.o $(OBJ)
-	gcc interface.o $(OBJ) -lm -o interface
+	gcc interface.o $(OBJ) -lm -o interface -lSDL2
+
+test_SDL : sdl_test.o ${OBJ}
+	gcc sdl_test.o ${OBJ} -lm -o test_SDL -lSDL2
+
+menu_SDL : menu.c ${OBJ}
+	gcc menu.c ${OBJ} -lm -o menu_SDL -lSDL2 -lSDL2_ttf -lSDL2_image
+
+map : map.c ${OBJ}
+	gcc map.c ${OBJ} -lm -o map -lSDL2 -lSDL2_ttf -lSDL2_image
 
 interface.o : interface.c
 	gcc -c interface.c
-
-test_map.o: test_map.c
-	gcc -c test_map.c
 
 mobs.o : Mobs/mobs.c
 	gcc -c Mobs/mobs.c

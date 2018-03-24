@@ -1,4 +1,4 @@
-#include "../all.h"
+#include "tour.h"
 
 /*-------- Sauvegarde --------*/
 static
@@ -132,14 +132,14 @@ int evoluer_tour_mono( tour_mono_t * mono )
 	return rtn;
 }
 
-static
-void afficher_tour_mono( tour_mono_t * mono )
-{
-	if( tour_existe(mono) )
-		printf("M");
-	else
-		printf("{NULL}");
-}
+/*static*/
+/*void afficher_tour_mono( tour_mono_t * mono )*/
+/*{*/
+/*	if( tour_existe(mono) )*/
+/*		printf("M");*/
+/*	else*/
+/*		printf("{NULL}");*/
+/*}*/
 
 
 /*-------- Creation --------*/
@@ -162,11 +162,12 @@ tour_mono_t * new_mono(int x, int y, int n)
 	
 	mono->degat = DEGATS_TOUR_MONO * pow(MULT_DEGATS_TOUR, n-1);
 	mono->cible = NULL;
+	mono->type = MONO;
 
 	mono->detruire = (int (*)( void ** )) detruire_tour_mono;
 	mono->attaquer = (void (*)(void *, void *(*)[N])) tour_mono_attaquer;
 	mono->evoluer = (int (*)(void *)) evoluer_tour_mono;
-	mono->afficher = (void (*)(void *)) afficher_tour_mono;
+/*	mono->afficher = (void (*)(void *)) afficher_tour_mono;*/
 	
 	return mono;
 }

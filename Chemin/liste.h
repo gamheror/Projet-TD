@@ -1,7 +1,8 @@
 #ifndef _LISTE_H_
 #define _LISTE_H_
 
-#include "../all.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct elem_s
 {
@@ -34,5 +35,7 @@ elem_t * element_courant(liste_t *);
 int elememt_existe(elem_t *);
 
 void afficher_element(elem_t *);
+
+void detruire_liste(liste_t **);
 
 #endif

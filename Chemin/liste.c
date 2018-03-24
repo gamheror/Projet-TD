@@ -1,6 +1,9 @@
-#include "../all.h"
+#include "liste.h"
 
 liste_t * initialisation()
+/*
+	Créé la liste et insert les valeurs
+*/
 {
 	liste_t * liste = malloc(sizeof(liste));
 	
@@ -18,8 +21,11 @@ liste_t * initialisation()
 }
 
 void insertion(liste_t * liste)
+/*
+	Insert les coord de chemin.txt dans la liste
+*/
 {
-	FILE * fichier = fopen("../Chemin/chemin.txt", "r");
+	FILE * fichier = fopen("Chemin/chemin.txt", "r");
 	
 	if(fichier == NULL)
 	{
@@ -98,3 +104,27 @@ void afficher_element(elem_t * elem)
 	if(elem != NULL)
 		printf("{%d %d}", elem->x, elem->y);
 }
+
+void detruire_liste(liste_t ** liste)
+{
+	if((*liste) != NULL)
+	{	
+		liste_debut(*liste);
+		elem_t * elem = (*liste)->courant;
+		while(elem != NULL)
+		{
+			liste_suivant(*liste);
+			free(elem);
+			elem = (*liste)->courant;
+		}
+		
+		free(*liste);
+		*liste = NULL;
+	}
+}
+
+
+
+
+
+

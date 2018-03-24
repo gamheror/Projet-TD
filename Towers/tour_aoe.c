@@ -1,4 +1,4 @@
-#include "../all.h"
+#include "tour.h"
 
 /*-------- Sauvegarde --------*/
 static
@@ -94,15 +94,15 @@ int evoluer_tour_aoe( tour_aoe_t * aoe )
 	return rtn;
 }
 
-static
-void afficher_tour_aoe( tour_aoe_t * aoe )
+/*static*/
+/*void afficher_tour_aoe( tour_aoe_t * aoe )*/
 /* Affichage d'une tour d'AOE */
-{
-	if( tour_existe(aoe) )
-		printf("A");
-	else
-		printf("{NULL}");
-}
+/*{*/
+/*	if( tour_existe(aoe) )*/
+/*		printf("A");*/
+/*	else*/
+/*		printf("{NULL}");*/
+/*}*/
 
 
 /*-------- Creation --------*/
@@ -124,11 +124,12 @@ tour_aoe_t * new_aoe(int x, int y, int n)
 	
 	
 	aoe->degat = DEGATS_TOUR_AOE * pow(MULT_DEGATS_TOUR, n-1);
+	aoe->type = AOE;
 
 	aoe->detruire = (int (*)( void ** )) detruire_tour_aoe;
 	aoe->attaquer = (void (*)(void *, void *(*)[N])) tour_aoe_attaquer;
 	aoe->evoluer = (int (*)(void *)) evoluer_tour_aoe;
-	aoe->afficher = (void (*)(void *)) afficher_tour_aoe;
+/*	aoe->afficher = (void (*)(void *)) afficher_tour_aoe;*/
 	
 	return aoe;
 }

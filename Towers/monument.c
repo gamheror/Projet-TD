@@ -1,4 +1,4 @@
-#include "../all.h"
+#include "tour.h"
 
 static int nb_monument = 0;
 
@@ -100,15 +100,15 @@ int evoluer_monument( monument_t * monu )
 }
 
 
-static
-void afficher_monument(monument_t * monu)
+/*static*/
+/*void afficher_monument(monument_t * monu)*/
 /* Affichage du monument */
-{
-	if( tour_existe(monu) )
-		printf("B");
-	else
-		printf("{NULL}");
-}
+/*{*/
+/*	if( tour_existe(monu) )*/
+/*		printf("B");*/
+/*	else*/
+/*		printf("{NULL}");*/
+/*}*/
 
 
 /*-------- Creation --------*/
@@ -127,10 +127,11 @@ monument_t * new_monument(int x, int y, int n)
 	
 	monu->degat = DEGATS_MONU * pow(MULT_DEGATS_TOUR, n-1);
 	monu->pv = PV_MONU;
+	monu->type = MONU;
 
 	monu->detruire = (int (*)(void **)) detruire_monument;
 	monu->evoluer = (int (*)(void *)) evoluer_monument;
-	monu->afficher = (void (*)(void *)) afficher_monument;
+/*	monu->afficher = (void (*)(void *)) afficher_monument;*/
 	monu->attaquer = (void (*)(void *, void *(*)[N])) monument_attaquer;
 	
 	m_x = x;

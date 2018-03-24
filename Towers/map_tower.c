@@ -186,7 +186,7 @@ void afficher_map_tower(map_tower map)
 			if(case_vide(map, j, i))
 				printf(" ");
 			else
-				COORD(map, j, i)->afficher( COORD(map, j, i) );
+				printf("T");
 		printf("\n");
 	}
 }
@@ -205,6 +205,16 @@ int attaquer_monument(map_tower map, int degats)
 	degats_monu( (monument_t**) &COORD(map, x, y), degats );
 	
 	return 0;
+}
+
+
+type_tour get_type_tour(map_tower map, int x, int y)
+{
+	if(!map_existe(map))
+		return -2;
+	if(case_vide(map, x, y))
+		return -1;
+	return get_type(COORD(map, x, y));
 }
 
 

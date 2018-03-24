@@ -1,7 +1,11 @@
 #ifndef _MOB_H_
 #define _MOB_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "../all.h"
+#include "mobs.h"
 #include "../Chemin/liste.h"
 
 typedef struct mobs_s
@@ -37,4 +41,8 @@ void detruire_mobs(mobs_t **);
 
 /* Assaine des dégats au monument */
 void attaque_monum(mobs_t *);
+
+/* Creation de la vague */
+void creer_vague(char);
+
 #endif

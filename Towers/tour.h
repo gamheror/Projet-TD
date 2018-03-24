@@ -1,5 +1,9 @@
 #ifndef _TOUR_H_
 #define _TOUR_H_
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
 
 #include "../all.h"
 #include "../Mobs/mobs.h"
@@ -54,6 +58,8 @@ int evolution_tour( tour_t * );
 
 int get_monu_pos(int *, int *);
 int degats_monu(monument_t **, int);
+
+type_tour get_type(tour_t *);
 
 
 /*-------- Destruction --------*/

@@ -1,4 +1,5 @@
-#include "../all.h"
+#include "mobs.h"
+#include "../Towers/tours.h"
 
 static int compteur_mobs = 0;
 
@@ -51,7 +52,6 @@ void perte_vie(mobs_t ** mobs, int nb_degat)
 			(*mobs)->detruire(mobs);
 	 }
 }
-
 
 mobs_t * creer_mobs_normal()
 {
@@ -131,8 +131,64 @@ void attaque_monum(mobs_t * mobs)
 	monument_t * monum;
 	liste_t * liste = mobs->pos;
 
-	if(fin_liste(liste))
+/*	if(fin_liste(liste))
 	{
 		if(degats_monu(&monum, mobs->attaque) != -1);
-	}
+	}*/
 }
+
+/*void creer_vague(char fichier)*/
+/*{*/
+/*	FILE * fic = fopen("fichier", "r");*/
+
+/*	if(!fic)*/
+/*	{*/
+/*		printf("\tERREUR, ouverture du fichier de vague impossible !\n");*/
+/*	}*/
+/*	*/
+/*	mobs_t * mobs;*/
+
+/*	char mob;*/
+/*	int nb_mobs;*/
+/*	int creer = 0;*/
+
+/*	while(!feof(fic))*/
+/*	{*/
+/*		fscanf(fic, "%c", mob);*/
+/*		*/
+/*		if(mobs != '\n')*/
+/*		{*/
+/*			fscanf(fic, "%d", nb_mobs);*/
+
+/*			while(creer < nb_mobs)*/
+/*			{*/
+/*				switch(mob)*/
+/*				{*/
+/*					case 'N':*/
+/*						mobs = creer_mobs_normal();*/
+/*						break;*/
+/*					*/
+/*					case 'T':*/
+/*						mobs = creer_mobs_tank();*/
+/*						break;*/
+
+/*					case 'D':*/
+/*						mobs = creer_mobs_degat();*/
+/*						break;*/
+
+/*					case 'B':*/
+/*						mobs = creer_mobs_boss();*/
+/*						break;*/
+/*			*/
+/*					default:*/
+/*						printf("Type du mobs inconnu");*/
+/*						break;*/
+/*				}*/
+
+/*				creer ++;*/
+/*			}*/
+/*		*/
+/*			creer = 0;*/
+/*		}*/
+/*	}*/
+/*}*/

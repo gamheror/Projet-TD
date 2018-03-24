@@ -1,4 +1,7 @@
+#include <stdlib.h>
+
 #include "../all.h"
+#include "tour.h"
 
 /*-------- Creation --------*/
 tour_t * creer_tour( int x, int y, int n )
@@ -50,6 +53,14 @@ int evolution_tour( tour_t * tour )
 	tour->degat *= MULT_DEGATS_TOUR;
 	
 	return ERR_OK;
+}
+
+
+type_tour get_type(tour_t * tour)
+{
+	if(!tour_existe(tour))
+		return -1;
+	return tour->type;
 }
 
 
