@@ -154,11 +154,11 @@ void attaque_monum(mobs_t * mobs)
 
 /*	while(!feof(fic))*/
 /*	{*/
-/*		fscanf(fic, "%c", mob);*/
+/*		fscanf(fic, "%c", &mob);*/
 /*		*/
-/*		if(mobs != '\n')*/
+/*		if(mob != '\n')*/
 /*		{*/
-/*			fscanf(fic, "%d", nb_mobs);*/
+/*			fscanf(fic, "%d", &nb_mobs);*/
 
 /*			while(creer < nb_mobs)*/
 /*			{*/
