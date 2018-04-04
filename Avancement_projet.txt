@@ -1,0 +1,273 @@
+﻿----Séance----
+30/01	Définition des structures de données
+
+
+
+
+
+02/02	Pierre : Creation de l'objet "tour_t".
+				 Fonction de creation d'une tour, existance, affichage et destrution.
+				 Extension de l'objet "tour_t" à "tour_mono_t" et "tour_aoe_t".
+
+		Thomas : Creation de l'objet "mobs_t".
+
+
+
+
+
+----Séance----
+06/02	Pierre : Creation de la fonction "evoluer_tour".
+		
+		Thomas : Fonctions de creation d'un mob, affichage et destruction.
+		
+		Antoine : Debut fonctions de selection de menu en console
+		
+		Quentin : Analyse des structures de données pour l'évolution des mobs sur le plateau
+		
+À faire:
+Ok		Fonction de perte de vie des mobs
+Ok		Finir la fonction de gestion de la prise en main
+
+
+
+
+
+08/02	Mise en commun des objets "mobs" et "tours".
+
+		Pierre : Creation du header "all" regroupant les #include et #define communs aux objets.
+				 Debut de la fonction de "recherche_ennemi" pour les "tour mono"
+				 
+		Thomas : Fonction de perte de vie des mobs
+		
+À faire:
+OK		incrementation du compteur de gold quand un mob meurt
+OK		Fonction "mobs_existe" : renvoie 1 si mob existe, 0 sinon
+
+
+
+
+
+09/02	Pierre : Ajout de traces de l'execution du programme de test des tours et des mobs, par exemple "mono <x,y> a tué <x,y> -z PV".
+				 Ajout du pointeur sur fonction "attaquer_ennemi" aux tours.
+				 Ajout des methodes privees "tour_mono_attaquer" et "rechercher_ennemi" a l'objet "tour_mono".
+				 Les degats des tour_mono et tour_aoe sont maintenant differents (definis en constantes).
+À faire:
+Ok		ajout des fonctions de recherche et d'attaque d'ennemis pour les tours.
+
+
+
+
+
+10/02	Pierre : Ajout des fonctions "evoluer" pour tours mono et aoe.
+				 Ajout du ptr sur fnct "evoluer" aux obj "tours".
+				 Fonction "attaquer" pour les tour aoe
+				 
+		Thomas : Debut d'une fonction pour gérer les vagues d'ennemis
+				 Debut de l'ajout d'un compteur de mobs
+				 
+		Quentin : Dedut d'une solution pour deplacer les mobs sur le plateau suivant un chemin
+		
+À faire :
+Ok		Fonctions pour detruire les tours du plateau en fin de vague (de meme pour mobs)
+
+
+
+
+
+----Séance----
+15/02	Pierre : Creation de la fonction pour detruire les tours du plateau
+				 Ajout de constantes pour le drop min et max des mobs
+				 
+		Thomas : Fonction "mobs_existe"
+				 Compteur de mobs fonctionnel
+				 Ajout des coordonnées des mobs
+				 Ajout d'un mesage console du nombre de gold généré par un mob a sa destruction
+		
+		Antoine : Debut de la SDL
+		
+		Quentin : Fin du déplacement des mobs 
+		
+À faire:
+		Faire bouger les mobs sur le plateau, plusieurs mobs peuvent etre sur la meme case
+OK		Ajout d'attributs aux obj mobs definissant leurs positions sur le plateau
+Ok		Créer le monument.
+Ok		Fichier(s) de sauvegarde
+
+
+
+
+
+----Séance----
+20/02	Pierre : Creation de l'objet monument.
+
+		Thomas : Début de la liste modelisant le chemin
+
+		Antoine : SDL
+
+À faire:
+        Déplacement des mobs
+        SDL
+Ok		Mécaniques de jeu
+
+
+
+
+24/02	Thomas : Problème de ségementation sur la liste du chemin
+				 Chemin créé + jointure coordonée mobs avec la liste
+
+Problème :
+Ok		Erreur de segmentation avec l'affichage du chemin
+
+A faire :
+Ok		Trouver comment assembler le liste du chemin avec l'avancement des mobs
+
+
+
+
+
+25/02	Pierre : Ajout de nouvelles fonctions à la liste
+
+Problème :
+		Insertion dans la liste : bug lors de la lecture du fichier, le derniere élément est {0 0} alos que celui-ci n'est pas présent dans le fichier
+
+
+
+
+
+02/03	Pierre : Matrice de tours (affichage et destruction des tours)
+				 Modifications des tours
+
+
+
+
+
+05/03	Pierre : Ergonomie de l'utilisation des tours
+				 Le monument est posé a la creation de la map aléatoirement
+				 Les 2 types de tours peuvent être posées sur la map
+				 Les tours de la map peuvent évoluer, attaquer et être detruite
+
+
+
+
+
+06/03	Pierre : Fichier de sauvegarde des tours + Chargement
+
+À faire :
+Ok		Modifier le fichhier de sauvegarde quand une tour evolue
+
+
+
+
+
+08/03	Pierre : La sauvegrade des tours est modifiée lorsqu'une tour évolue,
+				 Le chargement de la sauvegarde prend désormait en compte le niveau des tours
+				 Interface temporaire
+
+À faire :
+		Système de vagues
+		Fichier de sauvegarde des stats (vagues, GOLD, ...)
+		Déplacement des mobs
+		(Log file)
+		SDL
+
+Problème :
+		Perte_de_vie et detruire mobs :
+			erreur valgrind renvoie "Conditional jump or move depends on uninitialised value(s)"
+
+
+09/03	Thomas: Affichage d'une matrice avec le chemin 
+		Début de la fonction de déplacement
+
+Probleme: Erreur de segmentation
+		Liste.h non reconnu dans mobs.c
+
+
+
+
+----Séance----
+13/02	Pierre : SDL
+		
+	Thomas : Structure mobs_t, attaque des mobs
+		
+	Antoine : SDL
+		
+	Quentin : deplacement mobs
+
+À faire :
+Ok		Points de vie sur le monument + fnct d'attaque des mobs sur monu
+
+
+
+
+
+----Séance----
+16/03	Pierre : degats sur le monument, SDL timer
+
+	Antoine : SDL, places d'images
+		
+	Quentin, Thomas : Déplacement des mobs
+
+
+
+
+
+17/03	Pierre : interface
+	Thomas (en local): Changement des fonction de créations des mobs (3 fonctions de réation : mobs_degat, mobs_tank, mobs_boss)
+		 Fonction d'attaque à tester
+
+Probleme :
+		Probleme de seg fault dans mobs.c
+
+
+
+
+
+
+
+
+----Séance----
+19/03 	Thomas : Modification de la fonction attaquer
+		 Quatre fonctions de création de mobs (Tank, normal, degat et Boss)
+		 Correction de bug
+		 Aide sur le déplacement des mobs
+
+	Quentin : Déplacement mobs
+	
+	Pierre : SDL timer
+	
+	Antoine : SDL plateau
+
+20/03	Thomas : Fonction de création de vague via fichier
+
+
+
+
+
+
+
+
+---- Seance ----
+30/03	Antoine : Menu SDL
+		Thomas : CR, dépot git
+		Pierre, Quentin : prototypage des déplacement des mobs
+
+
+
+31/03	All : movement mobs sur interface graphique, prototype de placement tours, rédaction du CR, menu.
+
+
+
+01/04 - 02/04	Pierre : mise en commun du ce qui a été fait samedi.
+
+
+
+----- Seance -----
+03/04	Pierre : Equilibrage du jeu
+		All : documentation
+		Thomas : CR
+
+
+
+
+---- Seance -----
+04/04	All : CR

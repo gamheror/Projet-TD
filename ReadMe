@@ -1,0 +1,16 @@
+Compilation et lancement du jeu :
+	sh install.sh
+
+
+Lancer le jeu :
+	bin/zozor_defense
+
+
+Les bibliothèques nécessaires sont :
+	SDL2		version 2.0.8
+	SDL2_ttf	version 2.0.10
+	SDL2_image	version 2.0.3
+	
+
+Installation des bibliothèques :	
+	sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev

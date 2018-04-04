@@ -1,42 +1,51 @@
-OBJ = tour.o tour_mono.o tour_aoe.o mobs.o monument.o map_tower.o liste.o
+CC= gcc -c -Wall -lm
+EXEC= zozor_defense
+OBJ= menu.o jeu.o map_tower.o tour.o tour_mono.o tour_aoe.o monument.o mobs.o liste.o
 
 
-all : map
-	rm *.o
+
+all : $(EXEC)
 
 
-interface : interface.o $(OBJ)
-	gcc interface.o $(OBJ) -lm -o interface -lSDL2
+$(EXEC): src/zozor_defense.c $(OBJ)
+	gcc src/zozor_defense.c $(OBJ) -o bin/zozor_defense -lm -lSDL2 -lSDL2_image -lSDL2_ttf
 
-test_SDL : sdl_test.o ${OBJ}
-	gcc sdl_test.o ${OBJ} -lm -o test_SDL -lSDL2
 
-menu_SDL : menu.c ${OBJ}
-	gcc menu.c ${OBJ} -lm -o menu_SDL -lSDL2 -lSDL2_ttf -lSDL2_image
 
-map : map.c ${OBJ}
-	gcc map.c ${OBJ} -lm -o map -lSDL2 -lSDL2_ttf -lSDL2_image
+menu.o : src/SDL/menu.c
+	$(CC) src/SDL/menu.c -lSDL2 -lSDL2_image -lSDL2_ttf
 
-interface.o : interface.c
-	gcc -c interface.c
+jeu.o : src/SDL/jeu.c
+	$(CC) src/SDL/jeu.c -lSDL2 -lSDL2_image -lSDL2_ttf
 
-mobs.o : Mobs/mobs.c
-	gcc -c Mobs/mobs.c
+map_tower.o : src/Towers/map_tower.c
+	$(CC) src/Towers/map_tower.c
 
-tour.o : Towers/tour.c
-	gcc -c Towers/tour.c
+tour.o : src/Towers/tour.c
+	$(CC) src/Towers/tour.c
 
-tour_aoe.o : Towers/tour_aoe.c
-	gcc -c Towers/tour_aoe.c
+tour_mono.o : src/Towers/tour_mono.c
+	$(CC) src/Towers/tour_mono.c
 
-tour_mono.o: Towers/tour_mono.c
-	gcc -c Towers/tour_mono.c
+tour_aoe.o : src/Towers/tour_aoe.c
+	$(CC) src/Towers/tour_aoe.c
 
-monument.o: Towers/monument.c
-	gcc -c Towers/monument.c
+monument.o : src/Towers/monument.c
+	$(CC) src/Towers/monument.c
 
-map_tower.o: Towers/map_tower.c
-	gcc -c Towers/map_tower.c
 
-liste.o : Chemin/liste.c
-	gcc -c Chemin/liste.c
+mobs.o : src/Mobs/mobs.c
+	$(CC) src/Mobs/mobs.c
+
+
+liste.o : src/Chemin/liste.c
+	$(CC) src/Chemin/liste.c
+
+
+
+clean:
+	rm -rf *.o
+
+
+
+
