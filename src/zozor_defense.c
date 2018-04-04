@@ -100,7 +100,7 @@ int main()
          
         if(clique) // Si on a cliqué sur l'une des cases
         {
-            printf("Le jeu est pres à démarrer !\n");
+            printf("Le jeu est pret à démarrer !\n");
 			
 			/* Initialisation des parametres pour une partie */
 			GOLD = 1000; 
